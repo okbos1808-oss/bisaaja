@@ -1,6 +1,5 @@
 import HeroText from "@/components/HeroText";
 import ServiceCard from "@/components/ServiceCard";
-import ImageCarousel from "@/components/ImageCarousel";
 import TeamSection from "@/components/TeamSection";
 import DataImage from "@/lib/data1"
 import WhyUs from "@/components/WhyUs";
@@ -42,7 +41,7 @@ export default function Home() {
       </div>
 
       <HeroText />
-      <ServiceCard />
+     <ServiceCard title="Judul Service" desc="Deskripsi service" />
    
       <WhyUs/>
 
