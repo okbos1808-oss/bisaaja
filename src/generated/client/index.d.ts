@@ -1430,15 +1430,15 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    accounts: number
     permohonan: number
+    accounts: number
     sessions: number
     validasi: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     permohonan?: boolean | UserCountOutputTypeCountPermohonanArgs
+    accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     validasi?: boolean | UserCountOutputTypeCountValidasiArgs
   }
@@ -1457,15 +1457,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AccountWhereInput
+  export type UserCountOutputTypeCountPermohonanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermohonanWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountPermohonanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PermohonanWhereInput
+  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccountWhereInput
   }
 
   /**
@@ -4864,8 +4864,8 @@ export namespace Prisma {
     image?: boolean
     password?: boolean
     role?: boolean
-    accounts?: boolean | User$accountsArgs<ExtArgs>
     permohonan?: boolean | User$permohonanArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     validasi?: boolean | User$validasiArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -4903,8 +4903,8 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "password" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    accounts?: boolean | User$accountsArgs<ExtArgs>
     permohonan?: boolean | User$permohonanArgs<ExtArgs>
+    accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     validasi?: boolean | User$validasiArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -4915,8 +4915,8 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      accounts: Prisma.$AccountPayload<ExtArgs>[]
       permohonan: Prisma.$PermohonanPayload<ExtArgs>[]
+      accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       validasi: Prisma.$ValidasiPayload<ExtArgs>[]
     }
@@ -5322,8 +5322,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     permohonan<T extends User$permohonanArgs<ExtArgs> = {}>(args?: Subset<T, User$permohonanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermohonanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     validasi<T extends User$validasiArgs<ExtArgs> = {}>(args?: Subset<T, User$validasiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ValidasiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -5750,30 +5750,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.accounts
-   */
-  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Account
-     */
-    select?: AccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Account
-     */
-    omit?: AccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AccountInclude<ExtArgs> | null
-    where?: AccountWhereInput
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    cursor?: AccountWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
-  }
-
-  /**
    * User.permohonan
    */
   export type User$permohonanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5795,6 +5771,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PermohonanScalarFieldEnum | PermohonanScalarFieldEnum[]
+  }
+
+  /**
+   * User.accounts
+   */
+  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Account
+     */
+    omit?: AccountOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    where?: AccountWhereInput
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    cursor?: AccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
   }
 
   /**
@@ -6085,8 +6085,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    validasi?: boolean | Permohonan$validasiArgs<ExtArgs>
     pembayaran?: boolean | Permohonan$pembayaranArgs<ExtArgs>
+    validasi?: boolean | Permohonan$validasiArgs<ExtArgs>
   }, ExtArgs["result"]["permohonan"]>
 
   export type PermohonanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6139,8 +6139,8 @@ export namespace Prisma {
   export type PermohonanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "namaUsaha" | "jenisIzin" | "alamat" | "fileDokumen" | "nib" | "bpom" | "halal" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["permohonan"]>
   export type PermohonanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    validasi?: boolean | Permohonan$validasiArgs<ExtArgs>
     pembayaran?: boolean | Permohonan$pembayaranArgs<ExtArgs>
+    validasi?: boolean | Permohonan$validasiArgs<ExtArgs>
   }
   export type PermohonanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6153,8 +6153,8 @@ export namespace Prisma {
     name: "Permohonan"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      validasi: Prisma.$ValidasiPayload<ExtArgs> | null
       pembayaran: Prisma.$PembayaranPayload<ExtArgs> | null
+      validasi: Prisma.$ValidasiPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6564,8 +6564,8 @@ export namespace Prisma {
   export interface Prisma__PermohonanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    validasi<T extends Permohonan$validasiArgs<ExtArgs> = {}>(args?: Subset<T, Permohonan$validasiArgs<ExtArgs>>): Prisma__ValidasiClient<$Result.GetResult<Prisma.$ValidasiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     pembayaran<T extends Permohonan$pembayaranArgs<ExtArgs> = {}>(args?: Subset<T, Permohonan$pembayaranArgs<ExtArgs>>): Prisma__PembayaranClient<$Result.GetResult<Prisma.$PembayaranPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    validasi<T extends Permohonan$validasiArgs<ExtArgs> = {}>(args?: Subset<T, Permohonan$validasiArgs<ExtArgs>>): Prisma__ValidasiClient<$Result.GetResult<Prisma.$ValidasiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7003,25 +7003,6 @@ export namespace Prisma {
   }
 
   /**
-   * Permohonan.validasi
-   */
-  export type Permohonan$validasiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Validasi
-     */
-    select?: ValidasiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Validasi
-     */
-    omit?: ValidasiOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ValidasiInclude<ExtArgs> | null
-    where?: ValidasiWhereInput
-  }
-
-  /**
    * Permohonan.pembayaran
    */
   export type Permohonan$pembayaranArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7038,6 +7019,25 @@ export namespace Prisma {
      */
     include?: PembayaranInclude<ExtArgs> | null
     where?: PembayaranWhereInput
+  }
+
+  /**
+   * Permohonan.validasi
+   */
+  export type Permohonan$validasiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Validasi
+     */
+    select?: ValidasiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Validasi
+     */
+    omit?: ValidasiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ValidasiInclude<ExtArgs> | null
+    where?: ValidasiWhereInput
   }
 
   /**
@@ -9600,8 +9600,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
-    accounts?: AccountListRelationFilter
     permohonan?: PermohonanListRelationFilter
+    accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     validasi?: ValidasiListRelationFilter
   }
@@ -9614,8 +9614,8 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     role?: SortOrder
-    accounts?: AccountOrderByRelationAggregateInput
     permohonan?: PermohonanOrderByRelationAggregateInput
+    accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     validasi?: ValidasiOrderByRelationAggregateInput
   }
@@ -9631,8 +9631,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
     role?: StringFilter<"User"> | string
-    accounts?: AccountListRelationFilter
     permohonan?: PermohonanListRelationFilter
+    accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     validasi?: ValidasiListRelationFilter
   }, "id" | "email">
@@ -9680,8 +9680,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Permohonan"> | Date | string
     updatedAt?: DateTimeFilter<"Permohonan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    validasi?: XOR<ValidasiNullableScalarRelationFilter, ValidasiWhereInput> | null
     pembayaran?: XOR<PembayaranNullableScalarRelationFilter, PembayaranWhereInput> | null
+    validasi?: XOR<ValidasiNullableScalarRelationFilter, ValidasiWhereInput> | null
   }
 
   export type PermohonanOrderByWithRelationInput = {
@@ -9698,8 +9698,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
-    validasi?: ValidasiOrderByWithRelationInput
     pembayaran?: PembayaranOrderByWithRelationInput
+    validasi?: ValidasiOrderByWithRelationInput
   }
 
   export type PermohonanWhereUniqueInput = Prisma.AtLeast<{
@@ -9719,8 +9719,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Permohonan"> | Date | string
     updatedAt?: DateTimeFilter<"Permohonan"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    validasi?: XOR<ValidasiNullableScalarRelationFilter, ValidasiWhereInput> | null
     pembayaran?: XOR<PembayaranNullableScalarRelationFilter, PembayaranWhereInput> | null
+    validasi?: XOR<ValidasiNullableScalarRelationFilter, ValidasiWhereInput> | null
   }, "id">
 
   export type PermohonanOrderByWithAggregationInput = {
@@ -10079,8 +10079,8 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     role?: string
-    accounts?: AccountCreateNestedManyWithoutUserInput
     permohonan?: PermohonanCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     validasi?: ValidasiCreateNestedManyWithoutAdminInput
   }
@@ -10093,8 +10093,8 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     role?: string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     permohonan?: PermohonanUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     validasi?: ValidasiUncheckedCreateNestedManyWithoutAdminInput
   }
@@ -10107,8 +10107,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
     permohonan?: PermohonanUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     validasi?: ValidasiUpdateManyWithoutAdminNestedInput
   }
@@ -10121,8 +10121,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     permohonan?: PermohonanUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     validasi?: ValidasiUncheckedUpdateManyWithoutAdminNestedInput
   }
@@ -10170,8 +10170,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPermohonanInput
-    validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
     pembayaran?: PembayaranCreateNestedOneWithoutPermohonanInput
+    validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
   }
 
   export type PermohonanUncheckedCreateInput = {
@@ -10187,8 +10187,8 @@ export namespace Prisma {
     status?: $Enums.StatusPermohonan
     createdAt?: Date | string
     updatedAt?: Date | string
-    validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
     pembayaran?: PembayaranUncheckedCreateNestedOneWithoutPermohonanInput
+    validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
   }
 
   export type PermohonanUpdateInput = {
@@ -10204,8 +10204,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPermohonanNestedInput
-    validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
     pembayaran?: PembayaranUpdateOneWithoutPermohonanNestedInput
+    validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
   }
 
   export type PermohonanUncheckedUpdateInput = {
@@ -10221,8 +10221,8 @@ export namespace Prisma {
     status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
     pembayaran?: PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput
+    validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
   }
 
   export type PermohonanCreateManyInput = {
@@ -10626,16 +10626,16 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type AccountListRelationFilter = {
-    every?: AccountWhereInput
-    some?: AccountWhereInput
-    none?: AccountWhereInput
-  }
-
   export type PermohonanListRelationFilter = {
     every?: PermohonanWhereInput
     some?: PermohonanWhereInput
     none?: PermohonanWhereInput
+  }
+
+  export type AccountListRelationFilter = {
+    every?: AccountWhereInput
+    some?: AccountWhereInput
+    none?: AccountWhereInput
   }
 
   export type SessionListRelationFilter = {
@@ -10650,11 +10650,11 @@ export namespace Prisma {
     none?: ValidasiWhereInput
   }
 
-  export type AccountOrderByRelationAggregateInput = {
+  export type PermohonanOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type PermohonanOrderByRelationAggregateInput = {
+  export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10717,14 +10717,14 @@ export namespace Prisma {
     not?: NestedEnumStatusPermohonanFilter<$PrismaModel> | $Enums.StatusPermohonan
   }
 
-  export type ValidasiNullableScalarRelationFilter = {
-    is?: ValidasiWhereInput | null
-    isNot?: ValidasiWhereInput | null
-  }
-
   export type PembayaranNullableScalarRelationFilter = {
     is?: PembayaranWhereInput | null
     isNot?: PembayaranWhereInput | null
+  }
+
+  export type ValidasiNullableScalarRelationFilter = {
+    is?: ValidasiWhereInput | null
+    isNot?: ValidasiWhereInput | null
   }
 
   export type PermohonanCountOrderByAggregateInput = {
@@ -10886,18 +10886,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
-  export type AccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-  }
-
   export type PermohonanCreateNestedManyWithoutUserInput = {
     create?: XOR<PermohonanCreateWithoutUserInput, PermohonanUncheckedCreateWithoutUserInput> | PermohonanCreateWithoutUserInput[] | PermohonanUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PermohonanCreateOrConnectWithoutUserInput | PermohonanCreateOrConnectWithoutUserInput[]
     createMany?: PermohonanCreateManyUserInputEnvelope
     connect?: PermohonanWhereUniqueInput | PermohonanWhereUniqueInput[]
+  }
+
+  export type AccountCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
   export type SessionCreateNestedManyWithoutUserInput = {
@@ -10914,18 +10914,18 @@ export namespace Prisma {
     connect?: ValidasiWhereUniqueInput | ValidasiWhereUniqueInput[]
   }
 
-  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-  }
-
   export type PermohonanUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PermohonanCreateWithoutUserInput, PermohonanUncheckedCreateWithoutUserInput> | PermohonanCreateWithoutUserInput[] | PermohonanUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PermohonanCreateOrConnectWithoutUserInput | PermohonanCreateOrConnectWithoutUserInput[]
     createMany?: PermohonanCreateManyUserInputEnvelope
     connect?: PermohonanWhereUniqueInput | PermohonanWhereUniqueInput[]
+  }
+
+  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -10946,20 +10946,6 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type AccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
-  }
-
   export type PermohonanUpdateManyWithoutUserNestedInput = {
     create?: XOR<PermohonanCreateWithoutUserInput, PermohonanUncheckedCreateWithoutUserInput> | PermohonanCreateWithoutUserInput[] | PermohonanUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PermohonanCreateOrConnectWithoutUserInput | PermohonanCreateOrConnectWithoutUserInput[]
@@ -10972,6 +10958,20 @@ export namespace Prisma {
     update?: PermohonanUpdateWithWhereUniqueWithoutUserInput | PermohonanUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PermohonanUpdateManyWithWhereWithoutUserInput | PermohonanUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PermohonanScalarWhereInput | PermohonanScalarWhereInput[]
+  }
+
+  export type AccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
   export type SessionUpdateManyWithoutUserNestedInput = {
@@ -11002,20 +11002,6 @@ export namespace Prisma {
     deleteMany?: ValidasiScalarWhereInput | ValidasiScalarWhereInput[]
   }
 
-  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
-  }
-
   export type PermohonanUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PermohonanCreateWithoutUserInput, PermohonanUncheckedCreateWithoutUserInput> | PermohonanCreateWithoutUserInput[] | PermohonanUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PermohonanCreateOrConnectWithoutUserInput | PermohonanCreateOrConnectWithoutUserInput[]
@@ -11028,6 +11014,20 @@ export namespace Prisma {
     update?: PermohonanUpdateWithWhereUniqueWithoutUserInput | PermohonanUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PermohonanUpdateManyWithWhereWithoutUserInput | PermohonanUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PermohonanScalarWhereInput | PermohonanScalarWhereInput[]
+  }
+
+  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -11064,19 +11064,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type ValidasiCreateNestedOneWithoutPermohonanInput = {
-    create?: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
-    connectOrCreate?: ValidasiCreateOrConnectWithoutPermohonanInput
-    connect?: ValidasiWhereUniqueInput
-  }
-
   export type PembayaranCreateNestedOneWithoutPermohonanInput = {
     create?: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: PembayaranCreateOrConnectWithoutPermohonanInput
     connect?: PembayaranWhereUniqueInput
   }
 
-  export type ValidasiUncheckedCreateNestedOneWithoutPermohonanInput = {
+  export type ValidasiCreateNestedOneWithoutPermohonanInput = {
     create?: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: ValidasiCreateOrConnectWithoutPermohonanInput
     connect?: ValidasiWhereUniqueInput
@@ -11086,6 +11080,12 @@ export namespace Prisma {
     create?: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: PembayaranCreateOrConnectWithoutPermohonanInput
     connect?: PembayaranWhereUniqueInput
+  }
+
+  export type ValidasiUncheckedCreateNestedOneWithoutPermohonanInput = {
+    create?: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
+    connectOrCreate?: ValidasiCreateOrConnectWithoutPermohonanInput
+    connect?: ValidasiWhereUniqueInput
   }
 
   export type EnumStatusPermohonanFieldUpdateOperationsInput = {
@@ -11100,16 +11100,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPermohonanInput, UserUpdateWithoutPermohonanInput>, UserUncheckedUpdateWithoutPermohonanInput>
   }
 
-  export type ValidasiUpdateOneWithoutPermohonanNestedInput = {
-    create?: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
-    connectOrCreate?: ValidasiCreateOrConnectWithoutPermohonanInput
-    upsert?: ValidasiUpsertWithoutPermohonanInput
-    disconnect?: ValidasiWhereInput | boolean
-    delete?: ValidasiWhereInput | boolean
-    connect?: ValidasiWhereUniqueInput
-    update?: XOR<XOR<ValidasiUpdateToOneWithWhereWithoutPermohonanInput, ValidasiUpdateWithoutPermohonanInput>, ValidasiUncheckedUpdateWithoutPermohonanInput>
-  }
-
   export type PembayaranUpdateOneWithoutPermohonanNestedInput = {
     create?: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: PembayaranCreateOrConnectWithoutPermohonanInput
@@ -11120,7 +11110,7 @@ export namespace Prisma {
     update?: XOR<XOR<PembayaranUpdateToOneWithWhereWithoutPermohonanInput, PembayaranUpdateWithoutPermohonanInput>, PembayaranUncheckedUpdateWithoutPermohonanInput>
   }
 
-  export type ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput = {
+  export type ValidasiUpdateOneWithoutPermohonanNestedInput = {
     create?: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: ValidasiCreateOrConnectWithoutPermohonanInput
     upsert?: ValidasiUpsertWithoutPermohonanInput
@@ -11138,6 +11128,16 @@ export namespace Prisma {
     delete?: PembayaranWhereInput | boolean
     connect?: PembayaranWhereUniqueInput
     update?: XOR<XOR<PembayaranUpdateToOneWithWhereWithoutPermohonanInput, PembayaranUpdateWithoutPermohonanInput>, PembayaranUncheckedUpdateWithoutPermohonanInput>
+  }
+
+  export type ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput = {
+    create?: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
+    connectOrCreate?: ValidasiCreateOrConnectWithoutPermohonanInput
+    upsert?: ValidasiUpsertWithoutPermohonanInput
+    disconnect?: ValidasiWhereInput | boolean
+    delete?: ValidasiWhereInput | boolean
+    connect?: ValidasiWhereUniqueInput
+    update?: XOR<XOR<ValidasiUpdateToOneWithWhereWithoutPermohonanInput, ValidasiUpdateWithoutPermohonanInput>, ValidasiUncheckedUpdateWithoutPermohonanInput>
   }
 
   export type UserCreateNestedOneWithoutValidasiInput = {
@@ -11436,8 +11436,8 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     role?: string
-    accounts?: AccountCreateNestedManyWithoutUserInput
     permohonan?: PermohonanCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
     validasi?: ValidasiCreateNestedManyWithoutAdminInput
   }
 
@@ -11449,8 +11449,8 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     role?: string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     permohonan?: PermohonanUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     validasi?: ValidasiUncheckedCreateNestedManyWithoutAdminInput
   }
 
@@ -11478,8 +11478,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
     permohonan?: PermohonanUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
     validasi?: ValidasiUpdateManyWithoutAdminNestedInput
   }
 
@@ -11491,9 +11491,51 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     permohonan?: PermohonanUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     validasi?: ValidasiUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type PermohonanCreateWithoutUserInput = {
+    id?: string
+    namaUsaha: string
+    jenisIzin: string
+    alamat: string
+    fileDokumen: string
+    nib?: string | null
+    bpom?: string | null
+    halal?: string | null
+    status?: $Enums.StatusPermohonan
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    pembayaran?: PembayaranCreateNestedOneWithoutPermohonanInput
+    validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
+  }
+
+  export type PermohonanUncheckedCreateWithoutUserInput = {
+    id?: string
+    namaUsaha: string
+    jenisIzin: string
+    alamat: string
+    fileDokumen: string
+    nib?: string | null
+    bpom?: string | null
+    halal?: string | null
+    status?: $Enums.StatusPermohonan
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    pembayaran?: PembayaranUncheckedCreateNestedOneWithoutPermohonanInput
+    validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
+  }
+
+  export type PermohonanCreateOrConnectWithoutUserInput = {
+    where: PermohonanWhereUniqueInput
+    create: XOR<PermohonanCreateWithoutUserInput, PermohonanUncheckedCreateWithoutUserInput>
+  }
+
+  export type PermohonanCreateManyUserInputEnvelope = {
+    data: PermohonanCreateManyUserInput | PermohonanCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -11531,48 +11573,6 @@ export namespace Prisma {
 
   export type AccountCreateManyUserInputEnvelope = {
     data: AccountCreateManyUserInput | AccountCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PermohonanCreateWithoutUserInput = {
-    id?: string
-    namaUsaha: string
-    jenisIzin: string
-    alamat: string
-    fileDokumen: string
-    nib?: string | null
-    bpom?: string | null
-    halal?: string | null
-    status?: $Enums.StatusPermohonan
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
-    pembayaran?: PembayaranCreateNestedOneWithoutPermohonanInput
-  }
-
-  export type PermohonanUncheckedCreateWithoutUserInput = {
-    id?: string
-    namaUsaha: string
-    jenisIzin: string
-    alamat: string
-    fileDokumen: string
-    nib?: string | null
-    bpom?: string | null
-    halal?: string | null
-    status?: $Enums.StatusPermohonan
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
-    pembayaran?: PembayaranUncheckedCreateNestedOneWithoutPermohonanInput
-  }
-
-  export type PermohonanCreateOrConnectWithoutUserInput = {
-    where: PermohonanWhereUniqueInput
-    create: XOR<PermohonanCreateWithoutUserInput, PermohonanUncheckedCreateWithoutUserInput>
-  }
-
-  export type PermohonanCreateManyUserInputEnvelope = {
-    data: PermohonanCreateManyUserInput | PermohonanCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -11624,40 +11624,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AccountUpsertWithWhereUniqueWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
-    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type AccountUpdateWithWhereUniqueWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    data: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
-  }
-
-  export type AccountUpdateManyWithWhereWithoutUserInput = {
-    where: AccountScalarWhereInput
-    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type AccountScalarWhereInput = {
-    AND?: AccountScalarWhereInput | AccountScalarWhereInput[]
-    OR?: AccountScalarWhereInput[]
-    NOT?: AccountScalarWhereInput | AccountScalarWhereInput[]
-    id?: StringFilter<"Account"> | string
-    userId?: StringFilter<"Account"> | string
-    type?: StringFilter<"Account"> | string
-    provider?: StringFilter<"Account"> | string
-    providerAccountId?: StringFilter<"Account"> | string
-    refresh_token?: StringNullableFilter<"Account"> | string | null
-    access_token?: StringNullableFilter<"Account"> | string | null
-    expires_at?: IntNullableFilter<"Account"> | number | null
-    token_type?: StringNullableFilter<"Account"> | string | null
-    scope?: StringNullableFilter<"Account"> | string | null
-    id_token?: StringNullableFilter<"Account"> | string | null
-    session_state?: StringNullableFilter<"Account"> | string | null
-  }
-
   export type PermohonanUpsertWithWhereUniqueWithoutUserInput = {
     where: PermohonanWhereUniqueInput
     update: XOR<PermohonanUpdateWithoutUserInput, PermohonanUncheckedUpdateWithoutUserInput>
@@ -11690,6 +11656,40 @@ export namespace Prisma {
     status?: EnumStatusPermohonanFilter<"Permohonan"> | $Enums.StatusPermohonan
     createdAt?: DateTimeFilter<"Permohonan"> | Date | string
     updatedAt?: DateTimeFilter<"Permohonan"> | Date | string
+  }
+
+  export type AccountUpsertWithWhereUniqueWithoutUserInput = {
+    where: AccountWhereUniqueInput
+    update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
+    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
+  }
+
+  export type AccountUpdateWithWhereUniqueWithoutUserInput = {
+    where: AccountWhereUniqueInput
+    data: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AccountUpdateManyWithWhereWithoutUserInput = {
+    where: AccountScalarWhereInput
+    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AccountScalarWhereInput = {
+    AND?: AccountScalarWhereInput | AccountScalarWhereInput[]
+    OR?: AccountScalarWhereInput[]
+    NOT?: AccountScalarWhereInput | AccountScalarWhereInput[]
+    id?: StringFilter<"Account"> | string
+    userId?: StringFilter<"Account"> | string
+    type?: StringFilter<"Account"> | string
+    provider?: StringFilter<"Account"> | string
+    providerAccountId?: StringFilter<"Account"> | string
+    refresh_token?: StringNullableFilter<"Account"> | string | null
+    access_token?: StringNullableFilter<"Account"> | string | null
+    expires_at?: IntNullableFilter<"Account"> | number | null
+    token_type?: StringNullableFilter<"Account"> | string | null
+    scope?: StringNullableFilter<"Account"> | string | null
+    id_token?: StringNullableFilter<"Account"> | string | null
+    session_state?: StringNullableFilter<"Account"> | string | null
   }
 
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -11777,6 +11777,25 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPermohonanInput, UserUncheckedCreateWithoutPermohonanInput>
   }
 
+  export type PembayaranCreateWithoutPermohonanInput = {
+    id?: string
+    buktiBayar: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type PembayaranUncheckedCreateWithoutPermohonanInput = {
+    id?: string
+    buktiBayar: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type PembayaranCreateOrConnectWithoutPermohonanInput = {
+    where: PembayaranWhereUniqueInput
+    create: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
+  }
+
   export type ValidasiCreateWithoutPermohonanInput = {
     id?: string
     status: string
@@ -11796,25 +11815,6 @@ export namespace Prisma {
   export type ValidasiCreateOrConnectWithoutPermohonanInput = {
     where: ValidasiWhereUniqueInput
     create: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
-  }
-
-  export type PembayaranCreateWithoutPermohonanInput = {
-    id?: string
-    buktiBayar: string
-    status?: string
-    createdAt?: Date | string
-  }
-
-  export type PembayaranUncheckedCreateWithoutPermohonanInput = {
-    id?: string
-    buktiBayar: string
-    status?: string
-    createdAt?: Date | string
-  }
-
-  export type PembayaranCreateOrConnectWithoutPermohonanInput = {
-    where: PembayaranWhereUniqueInput
-    create: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
   }
 
   export type UserUpsertWithoutPermohonanInput = {
@@ -11854,6 +11854,31 @@ export namespace Prisma {
     validasi?: ValidasiUncheckedUpdateManyWithoutAdminNestedInput
   }
 
+  export type PembayaranUpsertWithoutPermohonanInput = {
+    update: XOR<PembayaranUpdateWithoutPermohonanInput, PembayaranUncheckedUpdateWithoutPermohonanInput>
+    create: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
+    where?: PembayaranWhereInput
+  }
+
+  export type PembayaranUpdateToOneWithWhereWithoutPermohonanInput = {
+    where?: PembayaranWhereInput
+    data: XOR<PembayaranUpdateWithoutPermohonanInput, PembayaranUncheckedUpdateWithoutPermohonanInput>
+  }
+
+  export type PembayaranUpdateWithoutPermohonanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buktiBayar?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PembayaranUncheckedUpdateWithoutPermohonanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    buktiBayar?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ValidasiUpsertWithoutPermohonanInput = {
     update: XOR<ValidasiUpdateWithoutPermohonanInput, ValidasiUncheckedUpdateWithoutPermohonanInput>
     create: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
@@ -11881,31 +11906,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PembayaranUpsertWithoutPermohonanInput = {
-    update: XOR<PembayaranUpdateWithoutPermohonanInput, PembayaranUncheckedUpdateWithoutPermohonanInput>
-    create: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
-    where?: PembayaranWhereInput
-  }
-
-  export type PembayaranUpdateToOneWithWhereWithoutPermohonanInput = {
-    where?: PembayaranWhereInput
-    data: XOR<PembayaranUpdateWithoutPermohonanInput, PembayaranUncheckedUpdateWithoutPermohonanInput>
-  }
-
-  export type PembayaranUpdateWithoutPermohonanInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    buktiBayar?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PembayaranUncheckedUpdateWithoutPermohonanInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    buktiBayar?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type UserCreateWithoutValidasiInput = {
     id?: string
     name?: string | null
@@ -11914,8 +11914,8 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     role?: string
-    accounts?: AccountCreateNestedManyWithoutUserInput
     permohonan?: PermohonanCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
@@ -11927,8 +11927,8 @@ export namespace Prisma {
     image?: string | null
     password?: string | null
     role?: string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     permohonan?: PermohonanUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -11993,8 +11993,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
     permohonan?: PermohonanUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
@@ -12006,8 +12006,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     role?: StringFieldUpdateOperationsInput | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     permohonan?: PermohonanUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -12134,20 +12134,6 @@ export namespace Prisma {
     validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
   }
 
-  export type AccountCreateManyUserInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-  }
-
   export type PermohonanCreateManyUserInput = {
     id?: string
     namaUsaha: string
@@ -12162,6 +12148,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type AccountCreateManyUserInput = {
+    id?: string
+    type: string
+    provider: string
+    providerAccountId: string
+    refresh_token?: string | null
+    access_token?: string | null
+    expires_at?: number | null
+    token_type?: string | null
+    scope?: string | null
+    id_token?: string | null
+    session_state?: string | null
+  }
+
   export type SessionCreateManyUserInput = {
     id?: string
     sessionToken: string
@@ -12174,6 +12174,52 @@ export namespace Prisma {
     status: string
     catatan?: string | null
     createdAt?: Date | string
+  }
+
+  export type PermohonanUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    namaUsaha?: StringFieldUpdateOperationsInput | string
+    jenisIzin?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    fileDokumen?: StringFieldUpdateOperationsInput | string
+    nib?: NullableStringFieldUpdateOperationsInput | string | null
+    bpom?: NullableStringFieldUpdateOperationsInput | string | null
+    halal?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pembayaran?: PembayaranUpdateOneWithoutPermohonanNestedInput
+    validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
+  }
+
+  export type PermohonanUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    namaUsaha?: StringFieldUpdateOperationsInput | string
+    jenisIzin?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    fileDokumen?: StringFieldUpdateOperationsInput | string
+    nib?: NullableStringFieldUpdateOperationsInput | string | null
+    bpom?: NullableStringFieldUpdateOperationsInput | string | null
+    halal?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pembayaran?: PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput
+    validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
+  }
+
+  export type PermohonanUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    namaUsaha?: StringFieldUpdateOperationsInput | string
+    jenisIzin?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    fileDokumen?: StringFieldUpdateOperationsInput | string
+    nib?: NullableStringFieldUpdateOperationsInput | string | null
+    bpom?: NullableStringFieldUpdateOperationsInput | string | null
+    halal?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -12216,52 +12262,6 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     id_token?: NullableStringFieldUpdateOperationsInput | string | null
     session_state?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type PermohonanUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    namaUsaha?: StringFieldUpdateOperationsInput | string
-    jenisIzin?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    fileDokumen?: StringFieldUpdateOperationsInput | string
-    nib?: NullableStringFieldUpdateOperationsInput | string | null
-    bpom?: NullableStringFieldUpdateOperationsInput | string | null
-    halal?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
-    pembayaran?: PembayaranUpdateOneWithoutPermohonanNestedInput
-  }
-
-  export type PermohonanUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    namaUsaha?: StringFieldUpdateOperationsInput | string
-    jenisIzin?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    fileDokumen?: StringFieldUpdateOperationsInput | string
-    nib?: NullableStringFieldUpdateOperationsInput | string | null
-    bpom?: NullableStringFieldUpdateOperationsInput | string | null
-    halal?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
-    pembayaran?: PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput
-  }
-
-  export type PermohonanUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    namaUsaha?: StringFieldUpdateOperationsInput | string
-    jenisIzin?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    fileDokumen?: StringFieldUpdateOperationsInput | string
-    nib?: NullableStringFieldUpdateOperationsInput | string | null
-    bpom?: NullableStringFieldUpdateOperationsInput | string | null
-    halal?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionUpdateWithoutUserInput = {

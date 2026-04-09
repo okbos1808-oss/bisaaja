@@ -54,8 +54,8 @@ model User {
   image         String?
   password      String?
   role          String       @default("user")
-  accounts      Account[]
   permohonan    Permohonan[]
+  accounts      Account[]
   sessions      Session[]
   validasi      Validasi[]
 
@@ -63,24 +63,21 @@ model User {
 }
 
 model Permohonan {
-  id          String @id @default(cuid())
+  id          String           @id @default(cuid())
   userId      String
   namaUsaha   String
   jenisIzin   String
   alamat      String
   fileDokumen String
-
-  nib   String?
-  bpom  String?
-  halal String?
-
-  status    StatusPermohonan @default(PENDING)
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
-
-  user       User        @relation(fields: [userId], references: [id])
-  validasi   Validasi?
-  pembayaran Pembayaran?
+  nib         String?
+  bpom        String?
+  halal       String?
+  status      StatusPermohonan @default(PENDING)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  user        User             @relation(fields: [userId], references: [id])
+  pembayaran  Pembayaran?
+  validasi    Validasi?
 }
 
 model Validasi {
