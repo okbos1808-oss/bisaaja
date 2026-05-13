@@ -48,6 +48,11 @@ export type Validasi = $Result.DefaultSelection<Prisma.$ValidasiPayload>
  * 
  */
 export type Pembayaran = $Result.DefaultSelection<Prisma.$PembayaranPayload>
+/**
+ * Model KomentarPermohonan
+ * 
+ */
+export type KomentarPermohonan = $Result.DefaultSelection<Prisma.$KomentarPermohonanPayload>
 
 /**
  * Enums
@@ -257,6 +262,16 @@ export class PrismaClient<
     * ```
     */
   get pembayaran(): Prisma.PembayaranDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.komentarPermohonan`: Exposes CRUD operations for the **KomentarPermohonan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more KomentarPermohonans
+    * const komentarPermohonans = await prisma.komentarPermohonan.findMany()
+    * ```
+    */
+  get komentarPermohonan(): Prisma.KomentarPermohonanDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -697,7 +712,8 @@ export namespace Prisma {
     User: 'User',
     Permohonan: 'Permohonan',
     Validasi: 'Validasi',
-    Pembayaran: 'Pembayaran'
+    Pembayaran: 'Pembayaran',
+    KomentarPermohonan: 'KomentarPermohonan'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -713,7 +729,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "verificationToken" | "user" | "permohonan" | "validasi" | "pembayaran"
+      modelProps: "account" | "session" | "verificationToken" | "user" | "permohonan" | "validasi" | "pembayaran" | "komentarPermohonan"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1235,6 +1251,80 @@ export namespace Prisma {
           }
         }
       }
+      KomentarPermohonan: {
+        payload: Prisma.$KomentarPermohonanPayload<ExtArgs>
+        fields: Prisma.KomentarPermohonanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.KomentarPermohonanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.KomentarPermohonanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>
+          }
+          findFirst: {
+            args: Prisma.KomentarPermohonanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.KomentarPermohonanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>
+          }
+          findMany: {
+            args: Prisma.KomentarPermohonanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>[]
+          }
+          create: {
+            args: Prisma.KomentarPermohonanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>
+          }
+          createMany: {
+            args: Prisma.KomentarPermohonanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.KomentarPermohonanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>[]
+          }
+          delete: {
+            args: Prisma.KomentarPermohonanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>
+          }
+          update: {
+            args: Prisma.KomentarPermohonanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>
+          }
+          deleteMany: {
+            args: Prisma.KomentarPermohonanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.KomentarPermohonanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.KomentarPermohonanUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>[]
+          }
+          upsert: {
+            args: Prisma.KomentarPermohonanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KomentarPermohonanPayload>
+          }
+          aggregate: {
+            args: Prisma.KomentarPermohonanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateKomentarPermohonan>
+          }
+          groupBy: {
+            args: Prisma.KomentarPermohonanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<KomentarPermohonanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.KomentarPermohonanCountArgs<ExtArgs>
+            result: $Utils.Optional<KomentarPermohonanCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1350,6 +1440,7 @@ export namespace Prisma {
     permohonan?: PermohonanOmit
     validasi?: ValidasiOmit
     pembayaran?: PembayaranOmit
+    komentarPermohonan?: KomentarPermohonanOmit
   }
 
   /* Types for Logging */
@@ -1480,6 +1571,37 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountValidasiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ValidasiWhereInput
+  }
+
+
+  /**
+   * Count Type PermohonanCountOutputType
+   */
+
+  export type PermohonanCountOutputType = {
+    komentar: number
+  }
+
+  export type PermohonanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    komentar?: boolean | PermohonanCountOutputTypeCountKomentarArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PermohonanCountOutputType without action
+   */
+  export type PermohonanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermohonanCountOutputType
+     */
+    select?: PermohonanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PermohonanCountOutputType without action
+   */
+  export type PermohonanCountOutputTypeCountKomentarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KomentarPermohonanWhereInput
   }
 
 
@@ -6087,6 +6209,8 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     pembayaran?: boolean | Permohonan$pembayaranArgs<ExtArgs>
     validasi?: boolean | Permohonan$validasiArgs<ExtArgs>
+    komentar?: boolean | Permohonan$komentarArgs<ExtArgs>
+    _count?: boolean | PermohonanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["permohonan"]>
 
   export type PermohonanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6141,6 +6265,8 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     pembayaran?: boolean | Permohonan$pembayaranArgs<ExtArgs>
     validasi?: boolean | Permohonan$validasiArgs<ExtArgs>
+    komentar?: boolean | Permohonan$komentarArgs<ExtArgs>
+    _count?: boolean | PermohonanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PermohonanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6155,6 +6281,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       pembayaran: Prisma.$PembayaranPayload<ExtArgs> | null
       validasi: Prisma.$ValidasiPayload<ExtArgs> | null
+      komentar: Prisma.$KomentarPermohonanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6566,6 +6693,7 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     pembayaran<T extends Permohonan$pembayaranArgs<ExtArgs> = {}>(args?: Subset<T, Permohonan$pembayaranArgs<ExtArgs>>): Prisma__PembayaranClient<$Result.GetResult<Prisma.$PembayaranPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     validasi<T extends Permohonan$validasiArgs<ExtArgs> = {}>(args?: Subset<T, Permohonan$validasiArgs<ExtArgs>>): Prisma__ValidasiClient<$Result.GetResult<Prisma.$ValidasiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    komentar<T extends Permohonan$komentarArgs<ExtArgs> = {}>(args?: Subset<T, Permohonan$komentarArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7038,6 +7166,30 @@ export namespace Prisma {
      */
     include?: ValidasiInclude<ExtArgs> | null
     where?: ValidasiWhereInput
+  }
+
+  /**
+   * Permohonan.komentar
+   */
+  export type Permohonan$komentarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    where?: KomentarPermohonanWhereInput
+    orderBy?: KomentarPermohonanOrderByWithRelationInput | KomentarPermohonanOrderByWithRelationInput[]
+    cursor?: KomentarPermohonanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: KomentarPermohonanScalarFieldEnum | KomentarPermohonanScalarFieldEnum[]
   }
 
   /**
@@ -9197,6 +9349,1064 @@ export namespace Prisma {
 
 
   /**
+   * Model KomentarPermohonan
+   */
+
+  export type AggregateKomentarPermohonan = {
+    _count: KomentarPermohonanCountAggregateOutputType | null
+    _min: KomentarPermohonanMinAggregateOutputType | null
+    _max: KomentarPermohonanMaxAggregateOutputType | null
+  }
+
+  export type KomentarPermohonanMinAggregateOutputType = {
+    id: string | null
+    permohonanId: string | null
+    adminName: string | null
+    isi: string | null
+    createdAt: Date | null
+  }
+
+  export type KomentarPermohonanMaxAggregateOutputType = {
+    id: string | null
+    permohonanId: string | null
+    adminName: string | null
+    isi: string | null
+    createdAt: Date | null
+  }
+
+  export type KomentarPermohonanCountAggregateOutputType = {
+    id: number
+    permohonanId: number
+    adminName: number
+    isi: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type KomentarPermohonanMinAggregateInputType = {
+    id?: true
+    permohonanId?: true
+    adminName?: true
+    isi?: true
+    createdAt?: true
+  }
+
+  export type KomentarPermohonanMaxAggregateInputType = {
+    id?: true
+    permohonanId?: true
+    adminName?: true
+    isi?: true
+    createdAt?: true
+  }
+
+  export type KomentarPermohonanCountAggregateInputType = {
+    id?: true
+    permohonanId?: true
+    adminName?: true
+    isi?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type KomentarPermohonanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KomentarPermohonan to aggregate.
+     */
+    where?: KomentarPermohonanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KomentarPermohonans to fetch.
+     */
+    orderBy?: KomentarPermohonanOrderByWithRelationInput | KomentarPermohonanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: KomentarPermohonanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KomentarPermohonans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KomentarPermohonans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned KomentarPermohonans
+    **/
+    _count?: true | KomentarPermohonanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: KomentarPermohonanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: KomentarPermohonanMaxAggregateInputType
+  }
+
+  export type GetKomentarPermohonanAggregateType<T extends KomentarPermohonanAggregateArgs> = {
+        [P in keyof T & keyof AggregateKomentarPermohonan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateKomentarPermohonan[P]>
+      : GetScalarType<T[P], AggregateKomentarPermohonan[P]>
+  }
+
+
+
+
+  export type KomentarPermohonanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KomentarPermohonanWhereInput
+    orderBy?: KomentarPermohonanOrderByWithAggregationInput | KomentarPermohonanOrderByWithAggregationInput[]
+    by: KomentarPermohonanScalarFieldEnum[] | KomentarPermohonanScalarFieldEnum
+    having?: KomentarPermohonanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: KomentarPermohonanCountAggregateInputType | true
+    _min?: KomentarPermohonanMinAggregateInputType
+    _max?: KomentarPermohonanMaxAggregateInputType
+  }
+
+  export type KomentarPermohonanGroupByOutputType = {
+    id: string
+    permohonanId: string
+    adminName: string
+    isi: string
+    createdAt: Date
+    _count: KomentarPermohonanCountAggregateOutputType | null
+    _min: KomentarPermohonanMinAggregateOutputType | null
+    _max: KomentarPermohonanMaxAggregateOutputType | null
+  }
+
+  type GetKomentarPermohonanGroupByPayload<T extends KomentarPermohonanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<KomentarPermohonanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof KomentarPermohonanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], KomentarPermohonanGroupByOutputType[P]>
+            : GetScalarType<T[P], KomentarPermohonanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type KomentarPermohonanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    permohonanId?: boolean
+    adminName?: boolean
+    isi?: boolean
+    createdAt?: boolean
+    permohonan?: boolean | PermohonanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["komentarPermohonan"]>
+
+  export type KomentarPermohonanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    permohonanId?: boolean
+    adminName?: boolean
+    isi?: boolean
+    createdAt?: boolean
+    permohonan?: boolean | PermohonanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["komentarPermohonan"]>
+
+  export type KomentarPermohonanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    permohonanId?: boolean
+    adminName?: boolean
+    isi?: boolean
+    createdAt?: boolean
+    permohonan?: boolean | PermohonanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["komentarPermohonan"]>
+
+  export type KomentarPermohonanSelectScalar = {
+    id?: boolean
+    permohonanId?: boolean
+    adminName?: boolean
+    isi?: boolean
+    createdAt?: boolean
+  }
+
+  export type KomentarPermohonanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "permohonanId" | "adminName" | "isi" | "createdAt", ExtArgs["result"]["komentarPermohonan"]>
+  export type KomentarPermohonanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permohonan?: boolean | PermohonanDefaultArgs<ExtArgs>
+  }
+  export type KomentarPermohonanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permohonan?: boolean | PermohonanDefaultArgs<ExtArgs>
+  }
+  export type KomentarPermohonanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permohonan?: boolean | PermohonanDefaultArgs<ExtArgs>
+  }
+
+  export type $KomentarPermohonanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "KomentarPermohonan"
+    objects: {
+      permohonan: Prisma.$PermohonanPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      permohonanId: string
+      adminName: string
+      isi: string
+      createdAt: Date
+    }, ExtArgs["result"]["komentarPermohonan"]>
+    composites: {}
+  }
+
+  type KomentarPermohonanGetPayload<S extends boolean | null | undefined | KomentarPermohonanDefaultArgs> = $Result.GetResult<Prisma.$KomentarPermohonanPayload, S>
+
+  type KomentarPermohonanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<KomentarPermohonanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: KomentarPermohonanCountAggregateInputType | true
+    }
+
+  export interface KomentarPermohonanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KomentarPermohonan'], meta: { name: 'KomentarPermohonan' } }
+    /**
+     * Find zero or one KomentarPermohonan that matches the filter.
+     * @param {KomentarPermohonanFindUniqueArgs} args - Arguments to find a KomentarPermohonan
+     * @example
+     * // Get one KomentarPermohonan
+     * const komentarPermohonan = await prisma.komentarPermohonan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends KomentarPermohonanFindUniqueArgs>(args: SelectSubset<T, KomentarPermohonanFindUniqueArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one KomentarPermohonan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {KomentarPermohonanFindUniqueOrThrowArgs} args - Arguments to find a KomentarPermohonan
+     * @example
+     * // Get one KomentarPermohonan
+     * const komentarPermohonan = await prisma.komentarPermohonan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends KomentarPermohonanFindUniqueOrThrowArgs>(args: SelectSubset<T, KomentarPermohonanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KomentarPermohonan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KomentarPermohonanFindFirstArgs} args - Arguments to find a KomentarPermohonan
+     * @example
+     * // Get one KomentarPermohonan
+     * const komentarPermohonan = await prisma.komentarPermohonan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends KomentarPermohonanFindFirstArgs>(args?: SelectSubset<T, KomentarPermohonanFindFirstArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KomentarPermohonan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KomentarPermohonanFindFirstOrThrowArgs} args - Arguments to find a KomentarPermohonan
+     * @example
+     * // Get one KomentarPermohonan
+     * const komentarPermohonan = await prisma.komentarPermohonan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends KomentarPermohonanFindFirstOrThrowArgs>(args?: SelectSubset<T, KomentarPermohonanFindFirstOrThrowArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more KomentarPermohonans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KomentarPermohonanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all KomentarPermohonans
+     * const komentarPermohonans = await prisma.komentarPermohonan.findMany()
+     * 
+     * // Get first 10 KomentarPermohonans
+     * const komentarPermohonans = await prisma.komentarPermohonan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const komentarPermohonanWithIdOnly = await prisma.komentarPermohonan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends KomentarPermohonanFindManyArgs>(args?: SelectSubset<T, KomentarPermohonanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a KomentarPermohonan.
+     * @param {KomentarPermohonanCreateArgs} args - Arguments to create a KomentarPermohonan.
+     * @example
+     * // Create one KomentarPermohonan
+     * const KomentarPermohonan = await prisma.komentarPermohonan.create({
+     *   data: {
+     *     // ... data to create a KomentarPermohonan
+     *   }
+     * })
+     * 
+     */
+    create<T extends KomentarPermohonanCreateArgs>(args: SelectSubset<T, KomentarPermohonanCreateArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many KomentarPermohonans.
+     * @param {KomentarPermohonanCreateManyArgs} args - Arguments to create many KomentarPermohonans.
+     * @example
+     * // Create many KomentarPermohonans
+     * const komentarPermohonan = await prisma.komentarPermohonan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends KomentarPermohonanCreateManyArgs>(args?: SelectSubset<T, KomentarPermohonanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many KomentarPermohonans and returns the data saved in the database.
+     * @param {KomentarPermohonanCreateManyAndReturnArgs} args - Arguments to create many KomentarPermohonans.
+     * @example
+     * // Create many KomentarPermohonans
+     * const komentarPermohonan = await prisma.komentarPermohonan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many KomentarPermohonans and only return the `id`
+     * const komentarPermohonanWithIdOnly = await prisma.komentarPermohonan.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends KomentarPermohonanCreateManyAndReturnArgs>(args?: SelectSubset<T, KomentarPermohonanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a KomentarPermohonan.
+     * @param {KomentarPermohonanDeleteArgs} args - Arguments to delete one KomentarPermohonan.
+     * @example
+     * // Delete one KomentarPermohonan
+     * const KomentarPermohonan = await prisma.komentarPermohonan.delete({
+     *   where: {
+     *     // ... filter to delete one KomentarPermohonan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends KomentarPermohonanDeleteArgs>(args: SelectSubset<T, KomentarPermohonanDeleteArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one KomentarPermohonan.
+     * @param {KomentarPermohonanUpdateArgs} args - Arguments to update one KomentarPermohonan.
+     * @example
+     * // Update one KomentarPermohonan
+     * const komentarPermohonan = await prisma.komentarPermohonan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends KomentarPermohonanUpdateArgs>(args: SelectSubset<T, KomentarPermohonanUpdateArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more KomentarPermohonans.
+     * @param {KomentarPermohonanDeleteManyArgs} args - Arguments to filter KomentarPermohonans to delete.
+     * @example
+     * // Delete a few KomentarPermohonans
+     * const { count } = await prisma.komentarPermohonan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends KomentarPermohonanDeleteManyArgs>(args?: SelectSubset<T, KomentarPermohonanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KomentarPermohonans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KomentarPermohonanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many KomentarPermohonans
+     * const komentarPermohonan = await prisma.komentarPermohonan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends KomentarPermohonanUpdateManyArgs>(args: SelectSubset<T, KomentarPermohonanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KomentarPermohonans and returns the data updated in the database.
+     * @param {KomentarPermohonanUpdateManyAndReturnArgs} args - Arguments to update many KomentarPermohonans.
+     * @example
+     * // Update many KomentarPermohonans
+     * const komentarPermohonan = await prisma.komentarPermohonan.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more KomentarPermohonans and only return the `id`
+     * const komentarPermohonanWithIdOnly = await prisma.komentarPermohonan.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends KomentarPermohonanUpdateManyAndReturnArgs>(args: SelectSubset<T, KomentarPermohonanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one KomentarPermohonan.
+     * @param {KomentarPermohonanUpsertArgs} args - Arguments to update or create a KomentarPermohonan.
+     * @example
+     * // Update or create a KomentarPermohonan
+     * const komentarPermohonan = await prisma.komentarPermohonan.upsert({
+     *   create: {
+     *     // ... data to create a KomentarPermohonan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the KomentarPermohonan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends KomentarPermohonanUpsertArgs>(args: SelectSubset<T, KomentarPermohonanUpsertArgs<ExtArgs>>): Prisma__KomentarPermohonanClient<$Result.GetResult<Prisma.$KomentarPermohonanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of KomentarPermohonans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KomentarPermohonanCountArgs} args - Arguments to filter KomentarPermohonans to count.
+     * @example
+     * // Count the number of KomentarPermohonans
+     * const count = await prisma.komentarPermohonan.count({
+     *   where: {
+     *     // ... the filter for the KomentarPermohonans we want to count
+     *   }
+     * })
+    **/
+    count<T extends KomentarPermohonanCountArgs>(
+      args?: Subset<T, KomentarPermohonanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], KomentarPermohonanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a KomentarPermohonan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KomentarPermohonanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends KomentarPermohonanAggregateArgs>(args: Subset<T, KomentarPermohonanAggregateArgs>): Prisma.PrismaPromise<GetKomentarPermohonanAggregateType<T>>
+
+    /**
+     * Group by KomentarPermohonan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KomentarPermohonanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends KomentarPermohonanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: KomentarPermohonanGroupByArgs['orderBy'] }
+        : { orderBy?: KomentarPermohonanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, KomentarPermohonanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKomentarPermohonanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the KomentarPermohonan model
+   */
+  readonly fields: KomentarPermohonanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for KomentarPermohonan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__KomentarPermohonanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    permohonan<T extends PermohonanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PermohonanDefaultArgs<ExtArgs>>): Prisma__PermohonanClient<$Result.GetResult<Prisma.$PermohonanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the KomentarPermohonan model
+   */
+  interface KomentarPermohonanFieldRefs {
+    readonly id: FieldRef<"KomentarPermohonan", 'String'>
+    readonly permohonanId: FieldRef<"KomentarPermohonan", 'String'>
+    readonly adminName: FieldRef<"KomentarPermohonan", 'String'>
+    readonly isi: FieldRef<"KomentarPermohonan", 'String'>
+    readonly createdAt: FieldRef<"KomentarPermohonan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * KomentarPermohonan findUnique
+   */
+  export type KomentarPermohonanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * Filter, which KomentarPermohonan to fetch.
+     */
+    where: KomentarPermohonanWhereUniqueInput
+  }
+
+  /**
+   * KomentarPermohonan findUniqueOrThrow
+   */
+  export type KomentarPermohonanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * Filter, which KomentarPermohonan to fetch.
+     */
+    where: KomentarPermohonanWhereUniqueInput
+  }
+
+  /**
+   * KomentarPermohonan findFirst
+   */
+  export type KomentarPermohonanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * Filter, which KomentarPermohonan to fetch.
+     */
+    where?: KomentarPermohonanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KomentarPermohonans to fetch.
+     */
+    orderBy?: KomentarPermohonanOrderByWithRelationInput | KomentarPermohonanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KomentarPermohonans.
+     */
+    cursor?: KomentarPermohonanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KomentarPermohonans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KomentarPermohonans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KomentarPermohonans.
+     */
+    distinct?: KomentarPermohonanScalarFieldEnum | KomentarPermohonanScalarFieldEnum[]
+  }
+
+  /**
+   * KomentarPermohonan findFirstOrThrow
+   */
+  export type KomentarPermohonanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * Filter, which KomentarPermohonan to fetch.
+     */
+    where?: KomentarPermohonanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KomentarPermohonans to fetch.
+     */
+    orderBy?: KomentarPermohonanOrderByWithRelationInput | KomentarPermohonanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KomentarPermohonans.
+     */
+    cursor?: KomentarPermohonanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KomentarPermohonans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KomentarPermohonans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KomentarPermohonans.
+     */
+    distinct?: KomentarPermohonanScalarFieldEnum | KomentarPermohonanScalarFieldEnum[]
+  }
+
+  /**
+   * KomentarPermohonan findMany
+   */
+  export type KomentarPermohonanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * Filter, which KomentarPermohonans to fetch.
+     */
+    where?: KomentarPermohonanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KomentarPermohonans to fetch.
+     */
+    orderBy?: KomentarPermohonanOrderByWithRelationInput | KomentarPermohonanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing KomentarPermohonans.
+     */
+    cursor?: KomentarPermohonanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KomentarPermohonans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KomentarPermohonans.
+     */
+    skip?: number
+    distinct?: KomentarPermohonanScalarFieldEnum | KomentarPermohonanScalarFieldEnum[]
+  }
+
+  /**
+   * KomentarPermohonan create
+   */
+  export type KomentarPermohonanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a KomentarPermohonan.
+     */
+    data: XOR<KomentarPermohonanCreateInput, KomentarPermohonanUncheckedCreateInput>
+  }
+
+  /**
+   * KomentarPermohonan createMany
+   */
+  export type KomentarPermohonanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many KomentarPermohonans.
+     */
+    data: KomentarPermohonanCreateManyInput | KomentarPermohonanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * KomentarPermohonan createManyAndReturn
+   */
+  export type KomentarPermohonanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * The data used to create many KomentarPermohonans.
+     */
+    data: KomentarPermohonanCreateManyInput | KomentarPermohonanCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KomentarPermohonan update
+   */
+  export type KomentarPermohonanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a KomentarPermohonan.
+     */
+    data: XOR<KomentarPermohonanUpdateInput, KomentarPermohonanUncheckedUpdateInput>
+    /**
+     * Choose, which KomentarPermohonan to update.
+     */
+    where: KomentarPermohonanWhereUniqueInput
+  }
+
+  /**
+   * KomentarPermohonan updateMany
+   */
+  export type KomentarPermohonanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update KomentarPermohonans.
+     */
+    data: XOR<KomentarPermohonanUpdateManyMutationInput, KomentarPermohonanUncheckedUpdateManyInput>
+    /**
+     * Filter which KomentarPermohonans to update
+     */
+    where?: KomentarPermohonanWhereInput
+    /**
+     * Limit how many KomentarPermohonans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * KomentarPermohonan updateManyAndReturn
+   */
+  export type KomentarPermohonanUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * The data used to update KomentarPermohonans.
+     */
+    data: XOR<KomentarPermohonanUpdateManyMutationInput, KomentarPermohonanUncheckedUpdateManyInput>
+    /**
+     * Filter which KomentarPermohonans to update
+     */
+    where?: KomentarPermohonanWhereInput
+    /**
+     * Limit how many KomentarPermohonans to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KomentarPermohonan upsert
+   */
+  export type KomentarPermohonanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the KomentarPermohonan to update in case it exists.
+     */
+    where: KomentarPermohonanWhereUniqueInput
+    /**
+     * In case the KomentarPermohonan found by the `where` argument doesn't exist, create a new KomentarPermohonan with this data.
+     */
+    create: XOR<KomentarPermohonanCreateInput, KomentarPermohonanUncheckedCreateInput>
+    /**
+     * In case the KomentarPermohonan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<KomentarPermohonanUpdateInput, KomentarPermohonanUncheckedUpdateInput>
+  }
+
+  /**
+   * KomentarPermohonan delete
+   */
+  export type KomentarPermohonanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+    /**
+     * Filter which KomentarPermohonan to delete.
+     */
+    where: KomentarPermohonanWhereUniqueInput
+  }
+
+  /**
+   * KomentarPermohonan deleteMany
+   */
+  export type KomentarPermohonanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KomentarPermohonans to delete
+     */
+    where?: KomentarPermohonanWhereInput
+    /**
+     * Limit how many KomentarPermohonans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * KomentarPermohonan without action
+   */
+  export type KomentarPermohonanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KomentarPermohonan
+     */
+    select?: KomentarPermohonanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KomentarPermohonan
+     */
+    omit?: KomentarPermohonanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KomentarPermohonanInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9299,6 +10509,17 @@ export namespace Prisma {
   };
 
   export type PembayaranScalarFieldEnum = (typeof PembayaranScalarFieldEnum)[keyof typeof PembayaranScalarFieldEnum]
+
+
+  export const KomentarPermohonanScalarFieldEnum: {
+    id: 'id',
+    permohonanId: 'permohonanId',
+    adminName: 'adminName',
+    isi: 'isi',
+    createdAt: 'createdAt'
+  };
+
+  export type KomentarPermohonanScalarFieldEnum = (typeof KomentarPermohonanScalarFieldEnum)[keyof typeof KomentarPermohonanScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9682,6 +10903,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     pembayaran?: XOR<PembayaranNullableScalarRelationFilter, PembayaranWhereInput> | null
     validasi?: XOR<ValidasiNullableScalarRelationFilter, ValidasiWhereInput> | null
+    komentar?: KomentarPermohonanListRelationFilter
   }
 
   export type PermohonanOrderByWithRelationInput = {
@@ -9700,6 +10922,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     pembayaran?: PembayaranOrderByWithRelationInput
     validasi?: ValidasiOrderByWithRelationInput
+    komentar?: KomentarPermohonanOrderByRelationAggregateInput
   }
 
   export type PermohonanWhereUniqueInput = Prisma.AtLeast<{
@@ -9721,6 +10944,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     pembayaran?: XOR<PembayaranNullableScalarRelationFilter, PembayaranWhereInput> | null
     validasi?: XOR<ValidasiNullableScalarRelationFilter, ValidasiWhereInput> | null
+    komentar?: KomentarPermohonanListRelationFilter
   }, "id">
 
   export type PermohonanOrderByWithAggregationInput = {
@@ -9875,6 +11099,61 @@ export namespace Prisma {
     buktiBayar?: StringWithAggregatesFilter<"Pembayaran"> | string
     status?: StringWithAggregatesFilter<"Pembayaran"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Pembayaran"> | Date | string
+  }
+
+  export type KomentarPermohonanWhereInput = {
+    AND?: KomentarPermohonanWhereInput | KomentarPermohonanWhereInput[]
+    OR?: KomentarPermohonanWhereInput[]
+    NOT?: KomentarPermohonanWhereInput | KomentarPermohonanWhereInput[]
+    id?: StringFilter<"KomentarPermohonan"> | string
+    permohonanId?: StringFilter<"KomentarPermohonan"> | string
+    adminName?: StringFilter<"KomentarPermohonan"> | string
+    isi?: StringFilter<"KomentarPermohonan"> | string
+    createdAt?: DateTimeFilter<"KomentarPermohonan"> | Date | string
+    permohonan?: XOR<PermohonanScalarRelationFilter, PermohonanWhereInput>
+  }
+
+  export type KomentarPermohonanOrderByWithRelationInput = {
+    id?: SortOrder
+    permohonanId?: SortOrder
+    adminName?: SortOrder
+    isi?: SortOrder
+    createdAt?: SortOrder
+    permohonan?: PermohonanOrderByWithRelationInput
+  }
+
+  export type KomentarPermohonanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: KomentarPermohonanWhereInput | KomentarPermohonanWhereInput[]
+    OR?: KomentarPermohonanWhereInput[]
+    NOT?: KomentarPermohonanWhereInput | KomentarPermohonanWhereInput[]
+    permohonanId?: StringFilter<"KomentarPermohonan"> | string
+    adminName?: StringFilter<"KomentarPermohonan"> | string
+    isi?: StringFilter<"KomentarPermohonan"> | string
+    createdAt?: DateTimeFilter<"KomentarPermohonan"> | Date | string
+    permohonan?: XOR<PermohonanScalarRelationFilter, PermohonanWhereInput>
+  }, "id">
+
+  export type KomentarPermohonanOrderByWithAggregationInput = {
+    id?: SortOrder
+    permohonanId?: SortOrder
+    adminName?: SortOrder
+    isi?: SortOrder
+    createdAt?: SortOrder
+    _count?: KomentarPermohonanCountOrderByAggregateInput
+    _max?: KomentarPermohonanMaxOrderByAggregateInput
+    _min?: KomentarPermohonanMinOrderByAggregateInput
+  }
+
+  export type KomentarPermohonanScalarWhereWithAggregatesInput = {
+    AND?: KomentarPermohonanScalarWhereWithAggregatesInput | KomentarPermohonanScalarWhereWithAggregatesInput[]
+    OR?: KomentarPermohonanScalarWhereWithAggregatesInput[]
+    NOT?: KomentarPermohonanScalarWhereWithAggregatesInput | KomentarPermohonanScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"KomentarPermohonan"> | string
+    permohonanId?: StringWithAggregatesFilter<"KomentarPermohonan"> | string
+    adminName?: StringWithAggregatesFilter<"KomentarPermohonan"> | string
+    isi?: StringWithAggregatesFilter<"KomentarPermohonan"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"KomentarPermohonan"> | Date | string
   }
 
   export type AccountCreateInput = {
@@ -10172,6 +11451,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutPermohonanInput
     pembayaran?: PembayaranCreateNestedOneWithoutPermohonanInput
     validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanUncheckedCreateInput = {
@@ -10189,6 +11469,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     pembayaran?: PembayaranUncheckedCreateNestedOneWithoutPermohonanInput
     validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanUncheckedCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanUpdateInput = {
@@ -10206,6 +11487,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutPermohonanNestedInput
     pembayaran?: PembayaranUpdateOneWithoutPermohonanNestedInput
     validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUpdateManyWithoutPermohonanNestedInput
   }
 
   export type PermohonanUncheckedUpdateInput = {
@@ -10223,6 +11505,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pembayaran?: PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput
     validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUncheckedUpdateManyWithoutPermohonanNestedInput
   }
 
   export type PermohonanCreateManyInput = {
@@ -10382,6 +11665,61 @@ export namespace Prisma {
     permohonanId?: StringFieldUpdateOperationsInput | string
     buktiBayar?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KomentarPermohonanCreateInput = {
+    id?: string
+    adminName: string
+    isi: string
+    createdAt?: Date | string
+    permohonan: PermohonanCreateNestedOneWithoutKomentarInput
+  }
+
+  export type KomentarPermohonanUncheckedCreateInput = {
+    id?: string
+    permohonanId: string
+    adminName: string
+    isi: string
+    createdAt?: Date | string
+  }
+
+  export type KomentarPermohonanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    adminName?: StringFieldUpdateOperationsInput | string
+    isi?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permohonan?: PermohonanUpdateOneRequiredWithoutKomentarNestedInput
+  }
+
+  export type KomentarPermohonanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    permohonanId?: StringFieldUpdateOperationsInput | string
+    adminName?: StringFieldUpdateOperationsInput | string
+    isi?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KomentarPermohonanCreateManyInput = {
+    id?: string
+    permohonanId: string
+    adminName: string
+    isi: string
+    createdAt?: Date | string
+  }
+
+  export type KomentarPermohonanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    adminName?: StringFieldUpdateOperationsInput | string
+    isi?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KomentarPermohonanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    permohonanId?: StringFieldUpdateOperationsInput | string
+    adminName?: StringFieldUpdateOperationsInput | string
+    isi?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10727,6 +12065,16 @@ export namespace Prisma {
     isNot?: ValidasiWhereInput | null
   }
 
+  export type KomentarPermohonanListRelationFilter = {
+    every?: KomentarPermohonanWhereInput
+    some?: KomentarPermohonanWhereInput
+    none?: KomentarPermohonanWhereInput
+  }
+
+  export type KomentarPermohonanOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PermohonanCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -10835,6 +12183,30 @@ export namespace Prisma {
     permohonanId?: SortOrder
     buktiBayar?: SortOrder
     status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type KomentarPermohonanCountOrderByAggregateInput = {
+    id?: SortOrder
+    permohonanId?: SortOrder
+    adminName?: SortOrder
+    isi?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type KomentarPermohonanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    permohonanId?: SortOrder
+    adminName?: SortOrder
+    isi?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type KomentarPermohonanMinOrderByAggregateInput = {
+    id?: SortOrder
+    permohonanId?: SortOrder
+    adminName?: SortOrder
+    isi?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11076,6 +12448,13 @@ export namespace Prisma {
     connect?: ValidasiWhereUniqueInput
   }
 
+  export type KomentarPermohonanCreateNestedManyWithoutPermohonanInput = {
+    create?: XOR<KomentarPermohonanCreateWithoutPermohonanInput, KomentarPermohonanUncheckedCreateWithoutPermohonanInput> | KomentarPermohonanCreateWithoutPermohonanInput[] | KomentarPermohonanUncheckedCreateWithoutPermohonanInput[]
+    connectOrCreate?: KomentarPermohonanCreateOrConnectWithoutPermohonanInput | KomentarPermohonanCreateOrConnectWithoutPermohonanInput[]
+    createMany?: KomentarPermohonanCreateManyPermohonanInputEnvelope
+    connect?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+  }
+
   export type PembayaranUncheckedCreateNestedOneWithoutPermohonanInput = {
     create?: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: PembayaranCreateOrConnectWithoutPermohonanInput
@@ -11086,6 +12465,13 @@ export namespace Prisma {
     create?: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: ValidasiCreateOrConnectWithoutPermohonanInput
     connect?: ValidasiWhereUniqueInput
+  }
+
+  export type KomentarPermohonanUncheckedCreateNestedManyWithoutPermohonanInput = {
+    create?: XOR<KomentarPermohonanCreateWithoutPermohonanInput, KomentarPermohonanUncheckedCreateWithoutPermohonanInput> | KomentarPermohonanCreateWithoutPermohonanInput[] | KomentarPermohonanUncheckedCreateWithoutPermohonanInput[]
+    connectOrCreate?: KomentarPermohonanCreateOrConnectWithoutPermohonanInput | KomentarPermohonanCreateOrConnectWithoutPermohonanInput[]
+    createMany?: KomentarPermohonanCreateManyPermohonanInputEnvelope
+    connect?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
   }
 
   export type EnumStatusPermohonanFieldUpdateOperationsInput = {
@@ -11120,6 +12506,20 @@ export namespace Prisma {
     update?: XOR<XOR<ValidasiUpdateToOneWithWhereWithoutPermohonanInput, ValidasiUpdateWithoutPermohonanInput>, ValidasiUncheckedUpdateWithoutPermohonanInput>
   }
 
+  export type KomentarPermohonanUpdateManyWithoutPermohonanNestedInput = {
+    create?: XOR<KomentarPermohonanCreateWithoutPermohonanInput, KomentarPermohonanUncheckedCreateWithoutPermohonanInput> | KomentarPermohonanCreateWithoutPermohonanInput[] | KomentarPermohonanUncheckedCreateWithoutPermohonanInput[]
+    connectOrCreate?: KomentarPermohonanCreateOrConnectWithoutPermohonanInput | KomentarPermohonanCreateOrConnectWithoutPermohonanInput[]
+    upsert?: KomentarPermohonanUpsertWithWhereUniqueWithoutPermohonanInput | KomentarPermohonanUpsertWithWhereUniqueWithoutPermohonanInput[]
+    createMany?: KomentarPermohonanCreateManyPermohonanInputEnvelope
+    set?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    disconnect?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    delete?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    connect?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    update?: KomentarPermohonanUpdateWithWhereUniqueWithoutPermohonanInput | KomentarPermohonanUpdateWithWhereUniqueWithoutPermohonanInput[]
+    updateMany?: KomentarPermohonanUpdateManyWithWhereWithoutPermohonanInput | KomentarPermohonanUpdateManyWithWhereWithoutPermohonanInput[]
+    deleteMany?: KomentarPermohonanScalarWhereInput | KomentarPermohonanScalarWhereInput[]
+  }
+
   export type PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput = {
     create?: XOR<PembayaranCreateWithoutPermohonanInput, PembayaranUncheckedCreateWithoutPermohonanInput>
     connectOrCreate?: PembayaranCreateOrConnectWithoutPermohonanInput
@@ -11138,6 +12538,20 @@ export namespace Prisma {
     delete?: ValidasiWhereInput | boolean
     connect?: ValidasiWhereUniqueInput
     update?: XOR<XOR<ValidasiUpdateToOneWithWhereWithoutPermohonanInput, ValidasiUpdateWithoutPermohonanInput>, ValidasiUncheckedUpdateWithoutPermohonanInput>
+  }
+
+  export type KomentarPermohonanUncheckedUpdateManyWithoutPermohonanNestedInput = {
+    create?: XOR<KomentarPermohonanCreateWithoutPermohonanInput, KomentarPermohonanUncheckedCreateWithoutPermohonanInput> | KomentarPermohonanCreateWithoutPermohonanInput[] | KomentarPermohonanUncheckedCreateWithoutPermohonanInput[]
+    connectOrCreate?: KomentarPermohonanCreateOrConnectWithoutPermohonanInput | KomentarPermohonanCreateOrConnectWithoutPermohonanInput[]
+    upsert?: KomentarPermohonanUpsertWithWhereUniqueWithoutPermohonanInput | KomentarPermohonanUpsertWithWhereUniqueWithoutPermohonanInput[]
+    createMany?: KomentarPermohonanCreateManyPermohonanInputEnvelope
+    set?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    disconnect?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    delete?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    connect?: KomentarPermohonanWhereUniqueInput | KomentarPermohonanWhereUniqueInput[]
+    update?: KomentarPermohonanUpdateWithWhereUniqueWithoutPermohonanInput | KomentarPermohonanUpdateWithWhereUniqueWithoutPermohonanInput[]
+    updateMany?: KomentarPermohonanUpdateManyWithWhereWithoutPermohonanInput | KomentarPermohonanUpdateManyWithWhereWithoutPermohonanInput[]
+    deleteMany?: KomentarPermohonanScalarWhereInput | KomentarPermohonanScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutValidasiInput = {
@@ -11180,6 +12594,20 @@ export namespace Prisma {
     upsert?: PermohonanUpsertWithoutPembayaranInput
     connect?: PermohonanWhereUniqueInput
     update?: XOR<XOR<PermohonanUpdateToOneWithWhereWithoutPembayaranInput, PermohonanUpdateWithoutPembayaranInput>, PermohonanUncheckedUpdateWithoutPembayaranInput>
+  }
+
+  export type PermohonanCreateNestedOneWithoutKomentarInput = {
+    create?: XOR<PermohonanCreateWithoutKomentarInput, PermohonanUncheckedCreateWithoutKomentarInput>
+    connectOrCreate?: PermohonanCreateOrConnectWithoutKomentarInput
+    connect?: PermohonanWhereUniqueInput
+  }
+
+  export type PermohonanUpdateOneRequiredWithoutKomentarNestedInput = {
+    create?: XOR<PermohonanCreateWithoutKomentarInput, PermohonanUncheckedCreateWithoutKomentarInput>
+    connectOrCreate?: PermohonanCreateOrConnectWithoutKomentarInput
+    upsert?: PermohonanUpsertWithoutKomentarInput
+    connect?: PermohonanWhereUniqueInput
+    update?: XOR<XOR<PermohonanUpdateToOneWithWhereWithoutKomentarInput, PermohonanUpdateWithoutKomentarInput>, PermohonanUncheckedUpdateWithoutKomentarInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11510,6 +12938,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     pembayaran?: PembayaranCreateNestedOneWithoutPermohonanInput
     validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanUncheckedCreateWithoutUserInput = {
@@ -11526,6 +12955,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     pembayaran?: PembayaranUncheckedCreateNestedOneWithoutPermohonanInput
     validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanUncheckedCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanCreateOrConnectWithoutUserInput = {
@@ -11817,6 +13247,30 @@ export namespace Prisma {
     create: XOR<ValidasiCreateWithoutPermohonanInput, ValidasiUncheckedCreateWithoutPermohonanInput>
   }
 
+  export type KomentarPermohonanCreateWithoutPermohonanInput = {
+    id?: string
+    adminName: string
+    isi: string
+    createdAt?: Date | string
+  }
+
+  export type KomentarPermohonanUncheckedCreateWithoutPermohonanInput = {
+    id?: string
+    adminName: string
+    isi: string
+    createdAt?: Date | string
+  }
+
+  export type KomentarPermohonanCreateOrConnectWithoutPermohonanInput = {
+    where: KomentarPermohonanWhereUniqueInput
+    create: XOR<KomentarPermohonanCreateWithoutPermohonanInput, KomentarPermohonanUncheckedCreateWithoutPermohonanInput>
+  }
+
+  export type KomentarPermohonanCreateManyPermohonanInputEnvelope = {
+    data: KomentarPermohonanCreateManyPermohonanInput | KomentarPermohonanCreateManyPermohonanInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutPermohonanInput = {
     update: XOR<UserUpdateWithoutPermohonanInput, UserUncheckedUpdateWithoutPermohonanInput>
     create: XOR<UserCreateWithoutPermohonanInput, UserUncheckedCreateWithoutPermohonanInput>
@@ -11906,6 +13360,33 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type KomentarPermohonanUpsertWithWhereUniqueWithoutPermohonanInput = {
+    where: KomentarPermohonanWhereUniqueInput
+    update: XOR<KomentarPermohonanUpdateWithoutPermohonanInput, KomentarPermohonanUncheckedUpdateWithoutPermohonanInput>
+    create: XOR<KomentarPermohonanCreateWithoutPermohonanInput, KomentarPermohonanUncheckedCreateWithoutPermohonanInput>
+  }
+
+  export type KomentarPermohonanUpdateWithWhereUniqueWithoutPermohonanInput = {
+    where: KomentarPermohonanWhereUniqueInput
+    data: XOR<KomentarPermohonanUpdateWithoutPermohonanInput, KomentarPermohonanUncheckedUpdateWithoutPermohonanInput>
+  }
+
+  export type KomentarPermohonanUpdateManyWithWhereWithoutPermohonanInput = {
+    where: KomentarPermohonanScalarWhereInput
+    data: XOR<KomentarPermohonanUpdateManyMutationInput, KomentarPermohonanUncheckedUpdateManyWithoutPermohonanInput>
+  }
+
+  export type KomentarPermohonanScalarWhereInput = {
+    AND?: KomentarPermohonanScalarWhereInput | KomentarPermohonanScalarWhereInput[]
+    OR?: KomentarPermohonanScalarWhereInput[]
+    NOT?: KomentarPermohonanScalarWhereInput | KomentarPermohonanScalarWhereInput[]
+    id?: StringFilter<"KomentarPermohonan"> | string
+    permohonanId?: StringFilter<"KomentarPermohonan"> | string
+    adminName?: StringFilter<"KomentarPermohonan"> | string
+    isi?: StringFilter<"KomentarPermohonan"> | string
+    createdAt?: DateTimeFilter<"KomentarPermohonan"> | Date | string
+  }
+
   export type UserCreateWithoutValidasiInput = {
     id?: string
     name?: string | null
@@ -11951,6 +13432,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPermohonanInput
     pembayaran?: PembayaranCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanUncheckedCreateWithoutValidasiInput = {
@@ -11967,6 +13449,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     pembayaran?: PembayaranUncheckedCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanUncheckedCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanCreateOrConnectWithoutValidasiInput = {
@@ -12036,6 +13519,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPermohonanNestedInput
     pembayaran?: PembayaranUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUpdateManyWithoutPermohonanNestedInput
   }
 
   export type PermohonanUncheckedUpdateWithoutValidasiInput = {
@@ -12052,6 +13536,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pembayaran?: PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUncheckedUpdateManyWithoutPermohonanNestedInput
   }
 
   export type PermohonanCreateWithoutPembayaranInput = {
@@ -12068,6 +13553,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPermohonanInput
     validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanUncheckedCreateWithoutPembayaranInput = {
@@ -12084,6 +13570,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
+    komentar?: KomentarPermohonanUncheckedCreateNestedManyWithoutPermohonanInput
   }
 
   export type PermohonanCreateOrConnectWithoutPembayaranInput = {
@@ -12116,6 +13603,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPermohonanNestedInput
     validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUpdateManyWithoutPermohonanNestedInput
   }
 
   export type PermohonanUncheckedUpdateWithoutPembayaranInput = {
@@ -12131,6 +13619,91 @@ export namespace Prisma {
     status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUncheckedUpdateManyWithoutPermohonanNestedInput
+  }
+
+  export type PermohonanCreateWithoutKomentarInput = {
+    id?: string
+    namaUsaha: string
+    jenisIzin: string
+    alamat: string
+    fileDokumen: string
+    nib?: string | null
+    bpom?: string | null
+    halal?: string | null
+    status?: $Enums.StatusPermohonan
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPermohonanInput
+    pembayaran?: PembayaranCreateNestedOneWithoutPermohonanInput
+    validasi?: ValidasiCreateNestedOneWithoutPermohonanInput
+  }
+
+  export type PermohonanUncheckedCreateWithoutKomentarInput = {
+    id?: string
+    userId: string
+    namaUsaha: string
+    jenisIzin: string
+    alamat: string
+    fileDokumen: string
+    nib?: string | null
+    bpom?: string | null
+    halal?: string | null
+    status?: $Enums.StatusPermohonan
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    pembayaran?: PembayaranUncheckedCreateNestedOneWithoutPermohonanInput
+    validasi?: ValidasiUncheckedCreateNestedOneWithoutPermohonanInput
+  }
+
+  export type PermohonanCreateOrConnectWithoutKomentarInput = {
+    where: PermohonanWhereUniqueInput
+    create: XOR<PermohonanCreateWithoutKomentarInput, PermohonanUncheckedCreateWithoutKomentarInput>
+  }
+
+  export type PermohonanUpsertWithoutKomentarInput = {
+    update: XOR<PermohonanUpdateWithoutKomentarInput, PermohonanUncheckedUpdateWithoutKomentarInput>
+    create: XOR<PermohonanCreateWithoutKomentarInput, PermohonanUncheckedCreateWithoutKomentarInput>
+    where?: PermohonanWhereInput
+  }
+
+  export type PermohonanUpdateToOneWithWhereWithoutKomentarInput = {
+    where?: PermohonanWhereInput
+    data: XOR<PermohonanUpdateWithoutKomentarInput, PermohonanUncheckedUpdateWithoutKomentarInput>
+  }
+
+  export type PermohonanUpdateWithoutKomentarInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    namaUsaha?: StringFieldUpdateOperationsInput | string
+    jenisIzin?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    fileDokumen?: StringFieldUpdateOperationsInput | string
+    nib?: NullableStringFieldUpdateOperationsInput | string | null
+    bpom?: NullableStringFieldUpdateOperationsInput | string | null
+    halal?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPermohonanNestedInput
+    pembayaran?: PembayaranUpdateOneWithoutPermohonanNestedInput
+    validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
+  }
+
+  export type PermohonanUncheckedUpdateWithoutKomentarInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    namaUsaha?: StringFieldUpdateOperationsInput | string
+    jenisIzin?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    fileDokumen?: StringFieldUpdateOperationsInput | string
+    nib?: NullableStringFieldUpdateOperationsInput | string | null
+    bpom?: NullableStringFieldUpdateOperationsInput | string | null
+    halal?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusPermohonanFieldUpdateOperationsInput | $Enums.StatusPermohonan
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pembayaran?: PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput
     validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
   }
 
@@ -12190,6 +13763,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pembayaran?: PembayaranUpdateOneWithoutPermohonanNestedInput
     validasi?: ValidasiUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUpdateManyWithoutPermohonanNestedInput
   }
 
   export type PermohonanUncheckedUpdateWithoutUserInput = {
@@ -12206,6 +13780,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pembayaran?: PembayaranUncheckedUpdateOneWithoutPermohonanNestedInput
     validasi?: ValidasiUncheckedUpdateOneWithoutPermohonanNestedInput
+    komentar?: KomentarPermohonanUncheckedUpdateManyWithoutPermohonanNestedInput
   }
 
   export type PermohonanUncheckedUpdateManyWithoutUserInput = {
@@ -12303,6 +13878,34 @@ export namespace Prisma {
     permohonanId?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     catatan?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KomentarPermohonanCreateManyPermohonanInput = {
+    id?: string
+    adminName: string
+    isi: string
+    createdAt?: Date | string
+  }
+
+  export type KomentarPermohonanUpdateWithoutPermohonanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    adminName?: StringFieldUpdateOperationsInput | string
+    isi?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KomentarPermohonanUncheckedUpdateWithoutPermohonanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    adminName?: StringFieldUpdateOperationsInput | string
+    isi?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KomentarPermohonanUncheckedUpdateManyWithoutPermohonanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    adminName?: StringFieldUpdateOperationsInput | string
+    isi?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

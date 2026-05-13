@@ -1,76 +1,72 @@
-import {
-  getPermohonanUser,   // ← renamed
-  approvePermohonan,
-  rejectPermohonan,
-} from "@/actions/permohonan";
+"use server";
 
-export default async function AdminPage() {
-  const data = await getPermohonanUser();  // ← renamed
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { StatusPermohonan } from "@/src/generated/client";
+import { revalidatePath } from "next/cache";
 
-  return (
-    <div className="min-h-screen bg-slate-50 p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-slate-800">
-          Dashboard Admin
-        </h1>
+//////////////////////////////////////////////////
+// GET ADMIN DATA ✅
+//////////////////////////////////////////////////
+export async function getPermohonanAdmin() {
+  const session = await auth();
 
-        {data.length === 0 && (
-          <p className="text-slate-500">Belum ada permohonan masuk</p>
-        )}
+  if (session?.user?.role !== "admin") {
+    throw new Error("Unauthorized");
+  }
 
-        <div className="space-y-4">
-          {data.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white border rounded-xl p-5 shadow-sm"
-            >
-              {/* DATA */}
-              <div className="grid md:grid-cols-2 gap-2 text-sm">
-                <p><b>Nama Usaha:</b> {item.namaUsaha}</p>
-                <p><b>Jenis Izin:</b> {item.jenisIzin}</p>
-                <p><b>Alamat:</b> {item.alamat}</p>
-                <p><b>NIB:</b> {item.nib || "-"}</p>
-              </div>
+  return prisma.permohonan.findMany({
+    include: {
+      user: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
 
-              {/* STATUS */}
-              <div className="mt-3">
-                <span
-                  className={`text-xs px-3 py-1 rounded-full font-medium ${
-                    item.status === "PENDING"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : item.status === "APPROVED"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {item.status}
-                </span>
-              </div>
+//////////////////////////////////////////////////
+// UPDATE STATUS (CORE)
+//////////////////////////////////////////////////
+export async function updateStatus(
+  id: string,
+  status: StatusPermohonan
+) {
+  const session = await auth();
 
-              {/* ACTION BUTTON */}
-              {item.status === "PENDING" && (
-                <div className="flex gap-2 mt-4">
-                  {/* APPROVE */}
-                  <form action={approvePermohonan}>
-                    <input type="hidden" name="id" value={item.id} />
-                    <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm">
-                      Approve
-                    </button>
-                  </form>
+  if (!session?.user || session.user.role !== "admin") {
+    return { error: "Unauthorized" };
+  }
 
-                  {/* REJECT */}
-                  <form action={rejectPermohonan}>
-                    <input type="hidden" name="id" value={item.id} />
-                    <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm">
-                      Reject
-                    </button>
-                  </form>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+  try {
+    await prisma.permohonan.update({
+      where: { id },
+      data: { status },
+    });
+
+    revalidatePath("/admin");
+
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { error: "Gagal update" };
+  }
+}
+
+//////////////////////////////////////////////////
+// ACTION BUTTONS ✅ (INI YANG ERROR TADI)
+//////////////////////////////////////////////////
+export async function setujuiAction(formData: FormData) {
+  const id = formData.get("id") as string;
+  return updateStatus(id, StatusPermohonan.DISETUJUI);
+}
+
+export async function tolakAction(formData: FormData) {
+  const id = formData.get("id") as string;
+  return updateStatus(id, StatusPermohonan.DITOLAK);
 }

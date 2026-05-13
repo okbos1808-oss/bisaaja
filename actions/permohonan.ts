@@ -1,111 +1,156 @@
 "use server";
 
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { StatusPermohonan } from "@/src/generated/client";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
-type Permohonan = {
-  id: string;
-  userId: string;
-  namaUsaha: string;
-  jenisIzin: string;
-  alamat: string;
-  nib: string | null;
-  status: "PENDING" | "APPROVED" | "REJECTED";
-  createdAt: Date;
-};
+import fs from "fs/promises";
+import path from "path";
+import { v4 as uuidv4 } from "uuid";
 
-let dataDummy: Permohonan[] = [];
-
-//////////////////////////////////////////////////
-// USER: SUBMIT
-//////////////////////////////////////////////////
-export async function submitPermohonan(formData: FormData) {
+export async function submitPermohonan(
+  formData: FormData
+) {
   const session = await auth();
 
-  if (!session?.user) {
-    return { error: "Harus login!" };
+  if (!session?.user?.id) {
+    return {
+      error: "Harus login",
+    };
   }
 
-  const namaUsaha = formData.get("namaUsaha") as string;
-  const jenisIzin = formData.get("jenisIzin") as string;
-  const alamat = formData.get("alamat") as string;
-  const nib = formData.get("punya_nib") as string;
+  try {
+    const namaUsaha =
+      formData.get(
+        "namaUsaha"
+      ) as string;
 
-  if (!namaUsaha || !jenisIzin || !alamat) {
-    return { error: "Semua field wajib diisi!" };
+    const jenisIzin =
+      formData.get(
+        "jenisIzin"
+      ) as string;
+
+    const alamat =
+      formData.get(
+        "alamat"
+      ) as string;
+
+    const nib =
+      (formData.get(
+        "punya_nib"
+      ) as string) || null;
+
+    const file =
+      formData.get(
+        "fileDokumen"
+      ) as File;
+
+    if (
+      !namaUsaha ||
+      !jenisIzin ||
+      !alamat
+    ) {
+      return {
+        error:
+          "Semua field wajib diisi",
+      };
+    }
+
+    let filePath = "";
+
+    if (file && file.size > 0) {
+      const bytes =
+        await file.arrayBuffer();
+
+      const buffer =
+        Buffer.from(bytes);
+
+      const uploadDir = path.join(
+        process.cwd(),
+        "public/uploads"
+      );
+
+      await fs.mkdir(uploadDir, {
+        recursive: true,
+      });
+
+      const fileName = `${uuidv4()}-${
+        file.name
+      }`;
+
+      const fullPath = path.join(
+        uploadDir,
+        fileName
+      );
+
+      await fs.writeFile(
+        fullPath,
+        buffer
+      );
+
+      filePath = `/uploads/${fileName}`;
+    }
+
+    await prisma.permohonan.create({
+      data: {
+        namaUsaha,
+        jenisIzin,
+        alamat,
+        nib,
+        fileDokumen: filePath,
+        userId: session.user.id,
+        status:
+          StatusPermohonan.PENDING,
+      },
+    });
+
+    revalidatePath("/admin");
+    revalidatePath("/status");
+
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error(
+      "CREATE ERROR:",
+      error
+    );
+
+    return {
+      error:
+        "Gagal simpan ke database",
+    };
   }
-
-  const data: Permohonan = {
-    id: Date.now().toString(),
-    userId: session.user.id, // 🔥 dari login
-    namaUsaha,
-    jenisIzin,
-    alamat,
-    nib: nib || null,
-    status: "PENDING",
-    createdAt: new Date(),
-  };
-
-  dataDummy.push(data);
-
-  return { success: true };
 }
 
-//////////////////////////////////////////////////
-// USER: LIHAT DATA SENDIRI
-//////////////////////////////////////////////////
 export async function getPermohonanUser() {
   const session = await auth();
 
-  if (!session?.user) return [];
-
-  return dataDummy.filter(
-    (item) => item.userId === session.user.id
-  );
-}
-
-//////////////////////////////////////////////////
-// ADMIN: LIHAT SEMUA
-//////////////////////////////////////////////////
-export async function getPermohonanAdmin() {
-  const session = await auth();
-
-  if (session?.user?.role !== "ADMIN") {
-    throw new Error("Unauthorized");
+  if (!session?.user) {
+    redirect("/login");
   }
 
-  return dataDummy;
-}
+  return prisma.permohonan.findMany({
+    where: {
+      userId: session.user.id,
+    },
 
-//////////////////////////////////////////////////
-// ADMIN: APPROVE
-//////////////////////////////////////////////////
-export async function approvePermohonan(formData: FormData) {
-  const session = await auth();
+    include: {
+      komentar: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
 
-  if (session?.user?.role !== "ADMIN") {
-    throw new Error("Unauthorized");
-  }
+      pembayaran: true,
 
-  const id = formData.get("id");
+      validasi: true,
+    },
 
-  dataDummy = dataDummy.map((item) =>
-    item.id === id ? { ...item, status: "APPROVED" } : item
-  );
-}
-
-//////////////////////////////////////////////////
-// ADMIN: REJECT
-//////////////////////////////////////////////////
-export async function rejectPermohonan(formData: FormData) {
-  const session = await auth();
-
-  if (session?.user?.role !== "ADMIN") {
-    throw new Error("Unauthorized");
-  }
-
-  const id = formData.get("id");
-
-  dataDummy = dataDummy.map((item) =>
-    item.id === id ? { ...item, status: "REJECTED" } : item
-  );
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }

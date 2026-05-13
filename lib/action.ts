@@ -70,7 +70,7 @@ export const signInCredentials = async (
     await signIn("credentials", {
       email,
       password,
-      redirectTo: "/dashboard",
+      redirectTo: "/status",
     })
     return {}
   } catch (error) {

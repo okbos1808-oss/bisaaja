@@ -190,6 +190,14 @@ exports.Prisma.PembayaranScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.KomentarPermohonanScalarFieldEnum = {
+  id: 'id',
+  permohonanId: 'permohonanId',
+  adminName: 'adminName',
+  isi: 'isi',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -221,7 +229,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Permohonan: 'Permohonan',
   Validasi: 'Validasi',
-  Pembayaran: 'Pembayaran'
+  Pembayaran: 'Pembayaran',
+  KomentarPermohonan: 'KomentarPermohonan'
 };
 
 /**

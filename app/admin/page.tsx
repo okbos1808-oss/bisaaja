@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import AdminDashboard from "@/components/AdminDashboard";
 import { Metadata } from "next";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -8,9 +10,21 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPage() {
+  const session = await auth();
+
+  // 🔐 WAJIB: hanya admin
+  if (!session?.user || session.user.role !== "admin") {
+    redirect("/status");
+  }
+
   const data = await prisma.permohonan.findMany({
     include: {
-      user: true,
+      user: {
+        select: {
+          name: true,
+          email: true, // ✅ sesuai UI kamu
+        },
+      },
     },
     orderBy: {
       createdAt: "desc",

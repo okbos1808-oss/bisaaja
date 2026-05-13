@@ -4,32 +4,47 @@ import { NextResponse } from "next/server";
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
+  const role = req.auth?.user?.role?.toLowerCase().trim();
 
-  const isLoginPage = nextUrl.pathname === "/login";
-  const isAdminPage = nextUrl.pathname.startsWith("/admin");
-  const isDashboardPage = nextUrl.pathname.startsWith("/dashboard");
+  console.log("=== MIDDLEWARE ===")
+  console.log("PATH:", nextUrl.pathname)
+  console.log("LOGGED IN:", isLoggedIn)
+  console.log("ROLE RAW:", req.auth?.user?.role)
+  console.log("ROLE LOWER:", role)
 
-  // 🔥 kalau sudah login tapi buka /login → redirect sesuai role
+  const pathname = nextUrl.pathname;
+
+  const isLoginPage = pathname === "/login";
+  const isAdminPage = pathname.startsWith("/admin");
+  const isStatusPage = pathname.startsWith("/status");
+
   if (isLoginPage && isLoggedIn) {
-    if (req.auth?.user?.role === "ADMIN") {
-      return NextResponse.redirect(new URL("/admin", nextUrl));
-    }
-    return NextResponse.redirect(new URL("/dashboard", nextUrl));
+    return NextResponse.redirect(
+      new URL(role === "admin" ? "/admin" : "/status", nextUrl)
+    );
   }
 
-  // 🔒 belum login tapi akses dashboard/admin
-  if (!isLoggedIn && (isAdminPage || isDashboardPage)) {
+  if (!isLoggedIn && (isAdminPage || isStatusPage)) {
     return NextResponse.redirect(new URL("/login", nextUrl));
   }
 
-  // 🔒 user biasa masuk admin
-  if (isAdminPage && req.auth?.user?.role !== "ADMIN") {
-    return NextResponse.redirect(new URL("/dashboard", nextUrl));
+  if (isAdminPage && role !== "admin") {
+    return NextResponse.redirect(new URL("/status", nextUrl));
+  }
+
+  if (isStatusPage && role === "admin") {
+    return NextResponse.redirect(new URL("/admin", nextUrl));
   }
 
   return NextResponse.next();
 });
 
 export const config = {
-  matcher: ["/login", "/admin/:path*", "/dashboard/:path*"],
+  matcher: [
+    "/login",
+    "/admin",
+    "/admin/:path*",
+    "/status",
+    "/status/:path*",
+  ],
 };
