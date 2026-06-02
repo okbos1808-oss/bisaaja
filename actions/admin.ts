@@ -8,28 +8,13 @@ import { revalidatePath } from "next/cache";
 export async function getPermohonanAdmin() {
   const session = await auth();
 
+  console.log("SESSION:", session);
+
   if (!session?.user?.id || session.user.role !== "admin") {
     throw new Error("Unauthorized");
   }
 
-  try {
-    return await prisma.permohonan.findMany({
-      include: {
-        user: {
-          select: { name: true, email: true },
-        },
-        validasi: true,
-        pembayaran: true,
-        komentar: {
-          orderBy: { createdAt: "asc" },
-        },
-      },
-      orderBy: { createdAt: "desc" },
-    });
-  } catch (error) {
-    console.error("GET ADMIN ERROR:", error);
-    return [];
-  }
+  return [];
 }
 
 export async function updateStatus(id: string, status: StatusPermohonan) {
