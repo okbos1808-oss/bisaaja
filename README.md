@@ -29,3 +29,6 @@ setting semau credetial
 
 ### kemudian oath client id
 api/auth/callback/google 
+
+### untuk mengecek updat di  vercel
+git log --oneline -n 5

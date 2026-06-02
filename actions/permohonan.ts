@@ -56,30 +56,40 @@ export async function getPermohonanUser() {
   }
 
   try {
-    const data =
-      await prisma.permohonan.findMany({
-        where: {
-          userId: session.user.id,
-        },
-        include: {
-          komentar: {
-            orderBy: {
-              createdAt: "asc",
-            },
+    console.log("=== DEBUG START ===");
+
+    const tables = await prisma.$queryRaw`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+      ORDER BY table_name
+    `;
+
+    console.log("TABLES:", tables);
+
+    const count = await prisma.permohonan.count();
+
+    console.log("PERMOHONAN COUNT:", count);
+
+    const data = await prisma.permohonan.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      include: {
+        komentar: {
+          orderBy: {
+            createdAt: "asc",
           },
         },
-        orderBy: {
-          createdAt: "desc",
-        },
-      });
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
     return data;
   } catch (error) {
-    console.error(
-      "GET USER ERROR:",
-      error
-    );
-
+    console.error("GET USER ERROR:", error);
     return [];
   }
 }

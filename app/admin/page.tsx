@@ -39,7 +39,11 @@ export default async function AdminPage() {
         </h1>
 
         <AdminDashboard data={data} />
+        
       </div>
     </div>
   );
 }
+const session = await auth();
+
+console.log("SESSION:", JSON.stringify(session, null, 2));
