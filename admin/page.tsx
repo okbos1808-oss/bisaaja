@@ -66,7 +66,3 @@ export async function setujuiAction(formData: FormData) {
   return updateStatus(id, StatusPermohonan.DISETUJUI);
 }
 
-export async function tolakAction(formData: FormData) {
-  const id = formData.get("id") as string;
-  return updateStatus(id, StatusPermohonan.DITOLAK);
-}

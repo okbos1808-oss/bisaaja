@@ -101,7 +101,6 @@ export async function simpanPenawaranHarga(
         data: {
           hargaPenawaran: hargaPenawaran.trim(),
           catatanHarga: catatanHarga.trim() || null,
-          hargaDikirimAt: new Date(),
           status: StatusPermohonan.PENAWARAN_HARGA_PENETAPAN_BIAYA,
         },
       }),
