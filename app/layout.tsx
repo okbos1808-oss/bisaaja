@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
+
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -25,15 +27,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-<html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-    <ScrollToTop />
-          <Navbar />
-    
+        <ScrollToTop />
+
+        <Navbar />
+
         <main>{children}</main>
-        
+
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+        />
       </body>
     </html>
   );

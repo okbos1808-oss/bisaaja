@@ -62,7 +62,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     authorized: async ({ auth, request: { nextUrl } }) => {
       const isLoggedIn = !!auth?.user
-      const protectedRoutes = ["/dashboard", "/user", "/formulir"]
+      const protectedRoutes = ["/dashboard", "/user", "/formulir", "/pembayaran", "/bukti"]
 
       if (!isLoggedIn && protectedRoutes.includes(nextUrl.pathname)) {
         return Response.redirect(new URL("/login", nextUrl))

@@ -13,7 +13,7 @@ const Navbar = async () => {
         <Link href="/" className="flex items-center gap-3">
           <div className="relative w-12 h-12">
             <Image
-              src="/halo.png"
+              src="/logo.png"
               alt="Logo"
               fill
               priority
@@ -35,6 +35,8 @@ const Navbar = async () => {
              <>
               <li><Link href="/status">Status</Link></li>
               <li><Link href="/formulir">Pendaftaran</Link></li>
+        
+
             </>
           )}
             

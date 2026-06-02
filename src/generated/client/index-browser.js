@@ -120,6 +120,16 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  emailVerified: 'emailVerified',
+  image: 'image',
+  password: 'password',
+  role: 'role'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -148,40 +158,6 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  emailVerified: 'emailVerified',
-  image: 'image',
-  password: 'password',
-  role: 'role'
-};
-
-exports.Prisma.PermohonanScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  namaUsaha: 'namaUsaha',
-  jenisIzin: 'jenisIzin',
-  alamat: 'alamat',
-  fileDokumen: 'fileDokumen',
-  nib: 'nib',
-  bpom: 'bpom',
-  halal: 'halal',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ValidasiScalarFieldEnum = {
-  id: 'id',
-  permohonanId: 'permohonanId',
-  adminId: 'adminId',
-  status: 'status',
-  catatan: 'catatan',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.PembayaranScalarFieldEnum = {
   id: 'id',
   permohonanId: 'permohonanId',
@@ -190,12 +166,39 @@ exports.Prisma.PembayaranScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ValidasiScalarFieldEnum = {
+  id: 'id',
+  permohonanId: 'permohonanId',
+  adminId: 'adminId',
+  status: 'status',
+  catatan: 'catatan',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.KomentarPermohonanScalarFieldEnum = {
   id: 'id',
   permohonanId: 'permohonanId',
   adminName: 'adminName',
   isi: 'isi',
   createdAt: 'createdAt'
+};
+
+exports.Prisma.PermohonanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  namaUsaha: 'namaUsaha',
+  divisi: 'divisi',
+  layanan: 'layanan',
+  noHp: 'noHp',
+  email: 'email',
+  alamat: 'alamat',
+  fileDokumen: 'fileDokumen',
+  status: 'status',
+  hargaPenawaran: 'hargaPenawaran',
+  catatanHarga: 'catatanHarga',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -212,25 +215,38 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.StatusPembayaran = exports.$Enums.StatusPembayaran = {
+  MENUNGGU_VERIFIKASI: 'MENUNGGU_VERIFIKASI',
+  TERVERIFIKASI: 'TERVERIFIKASI',
+  DITOLAK: 'DITOLAK'
+};
+
 exports.StatusPermohonan = exports.$Enums.StatusPermohonan = {
   PENDING: 'PENDING',
   DISETUJUI: 'DISETUJUI',
-  DITOLAK: 'DITOLAK',
-  MENUNGGU_PEMBAYARAN: 'MENUNGGU_PEMBAYARAN',
-  MENUNGGU_VERIFIKASI_PEMBAYARAN: 'MENUNGGU_VERIFIKASI_PEMBAYARAN',
-  MENUNGGU_SERTIFIKAT: 'MENUNGGU_SERTIFIKAT',
-  SERTIFIKAT_TERSEDIA: 'SERTIFIKAT_TERSEDIA'
+  SCREENING_ANALISA_KEBUTUHAN: 'SCREENING_ANALISA_KEBUTUHAN',
+  PENAWARAN_HARGA_PENETAPAN_BIAYA: 'PENAWARAN_HARGA_PENETAPAN_BIAYA',
+  PENGUMPULAN_DOKUMEN: 'PENGUMPULAN_DOKUMEN',
+  PEMBUATAN_AKUN_SISTEM_PEMERINTAH: 'PEMBUATAN_AKUN_SISTEM_PEMERINTAH',
+  PENYUSUNAN_DOKUMEN_PERIZINAN: 'PENYUSUNAN_DOKUMEN_PERIZINAN',
+  SUBMIT_PENGAJUAN: 'SUBMIT_PENGAJUAN',
+  VERIFIKASI_PEMERINTAH: 'VERIFIKASI_PEMERINTAH',
+  AUDIT_VISITASI_PEMERIKSAAN: 'AUDIT_VISITASI_PEMERIKSAAN',
+  PERBAIKAN_HASIL_AUDIT: 'PERBAIKAN_HASIL_AUDIT',
+  SUBMIT_PERBAIKAN: 'SUBMIT_PERBAIKAN',
+  PERSETUJUAN_DAN_PENERBITAN_SERTIFIKAT: 'PERSETUJUAN_DAN_PENERBITAN_SERTIFIKAT',
+  CLOSING_DAN_MAINTENANCE_CLIENT: 'CLOSING_DAN_MAINTENANCE_CLIENT'
 };
 
 exports.Prisma.ModelName = {
+  User: 'User',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  User: 'User',
-  Permohonan: 'Permohonan',
-  Validasi: 'Validasi',
   Pembayaran: 'Pembayaran',
-  KomentarPermohonan: 'KomentarPermohonan'
+  Validasi: 'Validasi',
+  KomentarPermohonan: 'KomentarPermohonan',
+  Permohonan: 'Permohonan'
 };
 
 /**

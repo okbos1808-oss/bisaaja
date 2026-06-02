@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const texts: string[] = [
-  "USAHA LEGALITAS",
-  "SERTIFIKASI HALAL",
-  "PERIZINAN BPOM",
-  "KONSULTASI USAHA",
+  "LEGALITAS USAHA",
+  "PERIZINAN USAHA",
+  "KONSULTASI BISNIS",
 ];
 
 const HeroText: React.FC = () => {
@@ -33,8 +32,8 @@ const HeroText: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.1, ease: "easeOut" }}
       >
-        <h1 className="text-2xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white text-left sm:text-center leading-tight">
-          BERSAMA KAMI MEMBANTU <br />
+        <h1 className="text-1xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-white text-left sm:text-center leading-tight">
+          BERSAMA KAMI MENGEMBANGKAN  <br />
 
           <span className="relative inline-block mt-4 sm:mt-6">
             <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 blur-xl opacity-30" />

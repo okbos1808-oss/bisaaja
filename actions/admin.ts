@@ -5,38 +5,10 @@ import { auth } from "@/lib/auth";
 import { StatusPermohonan } from "@/src/generated/client";
 import { revalidatePath } from "next/cache";
 
-const TRANSISI: Record<
-  StatusPermohonan,
-  StatusPermohonan[]
-> = {
-  PENDING: ["DISETUJUI", "DITOLAK"],
-
-  DISETUJUI: ["MENUNGGU_PEMBAYARAN"],
-
-  DITOLAK: [],
-
-  MENUNGGU_PEMBAYARAN: [
-    "MENUNGGU_VERIFIKASI_PEMBAYARAN",
-  ],
-
-  MENUNGGU_VERIFIKASI_PEMBAYARAN: [
-    "MENUNGGU_SERTIFIKAT",
-  ],
-
-  MENUNGGU_SERTIFIKAT: [
-    "SERTIFIKAT_TERSEDIA",
-  ],
-
-  SERTIFIKAT_TERSEDIA: [],
-};
-
 export async function getPermohonanAdmin() {
   const session = await auth();
 
-  if (
-    !session?.user?.id ||
-    session.user.role !== "admin"
-  ) {
+  if (!session?.user?.id || session.user.role !== "admin") {
     throw new Error("Unauthorized");
   }
 
@@ -44,240 +16,230 @@ export async function getPermohonanAdmin() {
     return await prisma.permohonan.findMany({
       include: {
         user: {
-          select: {
-            name: true,
-            email: true,
-          },
+          select: { name: true, email: true },
         },
-
         validasi: true,
-
+        pembayaran: true,
         komentar: {
-          orderBy: {
-            createdAt: "asc",
-          },
+          orderBy: { createdAt: "asc" },
         },
       },
-
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: { createdAt: "desc" },
     });
   } catch (error) {
-    console.error(
-      "GET ADMIN ERROR:",
-      error
-    );
-
+    console.error("GET ADMIN ERROR:", error);
     return [];
   }
 }
 
-export async function updateStatus(
-  id: string,
-  status: StatusPermohonan
+export async function updateStatus(id: string, status: StatusPermohonan) {
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id || session.user.role !== "admin") {
+      return { error: "Unauthorized" };
+    }
+
+    const permohonan = await prisma.permohonan.findUnique({ where: { id } });
+
+    if (!permohonan) {
+      return { error: "Permohonan tidak ditemukan" };
+    }
+
+    await prisma.$transaction([
+      prisma.permohonan.update({
+        where: { id },
+        data: { status },
+      }),
+      prisma.validasi.upsert({
+        where: { permohonanId: id },
+        create: { permohonanId: id, adminId: session.user.id, status },
+        update: { adminId: session.user.id, status },
+      }),
+    ]);
+
+    revalidatePath("/admin");
+    revalidatePath("/status");
+
+    return { success: true };
+  } catch (error) {
+    console.error("UPDATE STATUS ERROR:", error);
+    return { error: "Gagal update status" };
+  }
+}
+
+// BARU: simpan penawaran harga dan otomatis kirim notif lewat komentar
+export async function simpanPenawaranHarga(
+  permohonanId: string,
+  hargaPenawaran: string,
+  catatanHarga: string
 ) {
   try {
     const session = await auth();
 
-    if (
-      !session?.user?.id ||
-      session.user.role !== "admin"
-    ) {
-      return {
-        error: "Unauthorized",
-      };
+    if (!session?.user?.id || session.user.role !== "admin") {
+      return { error: "Unauthorized" };
     }
 
-    const data =
-      await prisma.permohonan.findUnique({
-        where: { id },
+    if (!hargaPenawaran.trim()) {
+      return { error: "Harga penawaran wajib diisi" };
+    }
 
-        select: {
-          status: true,
+    const permohonan = await prisma.permohonan.findUnique({
+      where: { id: permohonanId },
+    });
+
+    if (!permohonan) {
+      return { error: "Permohonan tidak ditemukan" };
+    }
+
+    // Simpan harga + set status ke PENAWARAN_HARGA_PENETAPAN_BIAYA
+    // + otomatis buat komentar agar user melihatnya di halaman status
+    await prisma.$transaction([
+      prisma.permohonan.update({
+        where: { id: permohonanId },
+        data: {
+          hargaPenawaran: hargaPenawaran.trim(),
+          catatanHarga: catatanHarga.trim() || null,
+          hargaDikirimAt: new Date(),
+          status: StatusPermohonan.PENAWARAN_HARGA_PENETAPAN_BIAYA,
         },
-      });
+      }),
 
-    if (!data) {
-      return {
-        error: "Data tidak ditemukan",
-      };
+      prisma.validasi.upsert({
+        where: { permohonanId },
+        create: {
+          permohonanId,
+          adminId: session.user.id,
+          status: StatusPermohonan.PENAWARAN_HARGA_PENETAPAN_BIAYA,
+        },
+        update: {
+          adminId: session.user.id,
+          status: StatusPermohonan.PENAWARAN_HARGA_PENETAPAN_BIAYA,
+        },
+      }),
+
+      // Komentar otomatis agar user melihat penawaran di halaman /status
+      prisma.komentarPermohonan.create({
+        data: {
+          permohonanId,
+          adminName: session.user.name ?? "Admin",
+          isi: [
+            `💰 Penawaran Harga: ${hargaPenawaran.trim()}`,
+            catatanHarga.trim() ? `📝 Catatan: ${catatanHarga.trim()}` : null,
+          ]
+            .filter(Boolean)
+            .join("\n"),
+        },
+      }),
+    ]);
+
+    revalidatePath("/admin");
+    revalidatePath("/status");
+
+    return { success: true };
+  } catch (error) {
+    console.error("SIMPAN HARGA ERROR:", error);
+    return { error: "Gagal menyimpan penawaran harga" };
+  }
+}
+
+export async function tambahKomentar(permohonanId: string, isi: string) {
+  const session = await auth();
+
+  if (!session?.user?.id || session.user.role !== "admin") {
+    return { error: "Unauthorized" };
+  }
+
+  const komentarText = isi.trim();
+
+  if (!komentarText) {
+    return { error: "Komentar tidak boleh kosong" };
+  }
+
+  try {
+    const permohonan = await prisma.permohonan.findUnique({
+      where: { id: permohonanId },
+    });
+
+    if (!permohonan) {
+      return { error: "Permohonan tidak ditemukan" };
     }
 
-    const allowedNext =
-      TRANSISI[data.status] || [];
-
-    if (
-      !allowedNext.includes(status)
-    ) {
-      return {
-        error: `Transisi tidak valid`,
-      };
-    }
-
-    await prisma.permohonan.update({
-      where: { id },
-
+    const komentar = await prisma.komentarPermohonan.create({
       data: {
-        status,
-
-        validasi: {
-          upsert: {
-            where: {
-              permohonanId: id,
-            },
-
-            create: {
-              adminId:
-                session.user.id,
-
-              status:
-                status.toString(),
-            },
-
-            update: {
-              adminId:
-                session.user.id,
-
-              status:
-                status.toString(),
-            },
-          },
-        },
+        permohonanId,
+        adminName: session.user.name ?? "Admin",
+        isi: komentarText,
       },
     });
 
     revalidatePath("/admin");
+    revalidatePath("/status");
 
-    return {
-      success: true,
-    };
+    return { success: true, data: komentar };
   } catch (error) {
-    console.error(
-      "UPDATE STATUS ERROR:",
-      error
-    );
-
-    return {
-      error:
-        "Gagal update status",
-    };
+    console.error("TAMBAH KOMENTAR ERROR:", error);
+    return { error: "Gagal menyimpan komentar" };
   }
 }
 
-export async function setujuiAction(
-  formData: FormData
-) {
-  const id = formData.get(
-    "id"
-  ) as string;
-
-  return updateStatus(
-    id,
-    StatusPermohonan.DISETUJUI
-  );
-}
-
-export async function tolakAction(
-  formData: FormData
-) {
-  const id = formData.get(
-    "id"
-  ) as string;
-
-  return updateStatus(
-    id,
-    StatusPermohonan.DITOLAK
-  );
-}
-
-export async function tambahKomentar(
-  permohonanId: string,
-  isi: string
-) {
+export async function getKomentar(permohonanId: string) {
   const session = await auth();
 
-  if (
-    !session?.user?.id ||
-    session.user.role !== "admin"
-  ) {
-    return {
-      error: "Unauthorized",
-    };
-  }
-
-  if (!isi.trim()) {
-    return {
-      error:
-        "Komentar tidak boleh kosong",
-    };
-  }
-
-  try {
-    const komentar =
-      await prisma.komentarPermohonan.create(
-        {
-          data: {
-            permohonanId,
-
-            adminName:
-              session.user.name ??
-              "Admin",
-
-            isi,
-          },
-        }
-      );
-
-    revalidatePath("/admin");
-
-    return {
-      success: true,
-      data: komentar,
-    };
-  } catch (error) {
-    console.error(
-      "TAMBAH KOMENTAR ERROR:",
-      error
-    );
-
-    return {
-      error:
-        "Gagal menyimpan komentar",
-    };
-  }
-}
-
-export async function getKomentar(
-  permohonanId: string
-) {
-  const session = await auth();
-
-  if (
-    !session?.user?.id ||
-    session.user.role !== "admin"
-  ) {
+  if (!session?.user?.id || session.user.role !== "admin") {
     throw new Error("Unauthorized");
   }
 
   try {
-    return await prisma.komentarPermohonan.findMany(
-      {
-        where: {
-          permohonanId,
-        },
-
-        orderBy: {
-          createdAt: "asc",
-        },
-      }
-    );
+    return await prisma.komentarPermohonan.findMany({
+      where: { permohonanId },
+      orderBy: { createdAt: "asc" },
+    });
   } catch (error) {
-    console.error(
-      "GET KOMENTAR ERROR:",
-      error
-    );
-
+    console.error("GET KOMENTAR ERROR:", error);
     return [];
   }
+}
+export async function editKomentar(
+  komentarId: string,
+  isi: string
+) {
+  const session = await auth();
+
+  if (!session?.user?.id || session.user.role !== "admin") {
+    return { error: "Unauthorized" };
+  }
+
+  const komentar = await prisma.komentarPermohonan.update({
+    where: { id: komentarId },
+    data: { isi: isi.trim() },
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/status");
+
+  return {
+    success: true,
+    data: komentar,
+  };
+}
+
+export async function hapusKomentar(
+  komentarId: string
+) {
+  const session = await auth();
+
+  if (!session?.user?.id || session.user.role !== "admin") {
+    return { error: "Unauthorized" };
+  }
+
+  await prisma.komentarPermohonan.delete({
+    where: { id: komentarId },
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/status");
+
+  return { success: true };
 }
