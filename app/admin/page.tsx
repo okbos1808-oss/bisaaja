@@ -12,6 +12,9 @@ export const metadata: Metadata = {
 export default async function AdminPage() {
   const session = await auth();
 
+
+console.log("SESSION:", JSON.stringify(session, null, 2));
+
   // 🔐 WAJIB: hanya admin
   if (!session?.user || session.user.role !== "admin") {
     redirect("/status");
@@ -44,6 +47,3 @@ export default async function AdminPage() {
     </div>
   );
 }
-const session = await auth();
-
-console.log("SESSION:", JSON.stringify(session, null, 2));

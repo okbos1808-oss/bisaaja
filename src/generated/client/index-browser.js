@@ -158,14 +158,6 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
-exports.Prisma.PembayaranScalarFieldEnum = {
-  id: 'id',
-  permohonanId: 'permohonanId',
-  buktiBayar: 'buktiBayar',
-  status: 'status',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.ValidasiScalarFieldEnum = {
   id: 'id',
   permohonanId: 'permohonanId',
@@ -215,12 +207,6 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.StatusPembayaran = exports.$Enums.StatusPembayaran = {
-  MENUNGGU_VERIFIKASI: 'MENUNGGU_VERIFIKASI',
-  TERVERIFIKASI: 'TERVERIFIKASI',
-  DITOLAK: 'DITOLAK'
-};
-
 exports.StatusPermohonan = exports.$Enums.StatusPermohonan = {
   PENDING: 'PENDING',
   DISETUJUI: 'DISETUJUI',
@@ -243,7 +229,6 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  Pembayaran: 'Pembayaran',
   Validasi: 'Validasi',
   KomentarPermohonan: 'KomentarPermohonan',
   Permohonan: 'Permohonan'

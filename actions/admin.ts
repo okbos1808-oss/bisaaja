@@ -19,7 +19,6 @@ export async function getPermohonanAdmin() {
           select: { name: true, email: true },
         },
         validasi: true,
-        pembayaran: true,
         komentar: {
           orderBy: { createdAt: "asc" },
         },

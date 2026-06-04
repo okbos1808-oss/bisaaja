@@ -63,18 +63,6 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-model Pembayaran {
-  id           String           @id @default(cuid())
-  permohonanId String           @unique
-  buktiBayar   String
-  // FIX: was String — use the enum so invalid values are rejected at the DB level
-  status       StatusPembayaran @default(MENUNGGU_VERIFIKASI)
-  createdAt    DateTime         @default(now())
-  permohonan   Permohonan       @relation(fields: [permohonanId], references: [id], onDelete: Cascade)
-
-  @@map("pembayaran")
-}
-
 model Validasi {
   id           String           @id @default(cuid())
   permohonanId String           @unique
@@ -126,9 +114,8 @@ model Permohonan {
 
   user User @relation(fields: [userId], references: [id])
 
-  komentar   KomentarPermohonan[]
-  pembayaran Pembayaran?
-  validasi   Validasi?
+  komentar KomentarPermohonan[]
+  validasi Validasi?
 
   @@index([userId])
   @@map("permohonan")

@@ -39,7 +39,6 @@ export const getPermohonan = async () => {
             email: true, // ✅ WAJIB (biar tampil di admin)
           },
         },
-        pembayaran: true,
         validasi: true,
       },
 
