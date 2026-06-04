@@ -102,7 +102,7 @@ export default function StatusClient({
     useTransition();
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold mb-8">
         Status Permohonan
       </h1>
@@ -128,7 +128,7 @@ export default function StatusClient({
                 key={item.id}
                 className="bg-white rounded-xl border shadow-sm overflow-hidden"
               >
-                <div className="p-6 border-b flex justify-between">
+                <div className="p-4 sm:p-6 border-b flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
                   <div>
                     <h2 className="text-xl font-bold">
                       {item.namaUsaha}
@@ -149,7 +149,7 @@ export default function StatusClient({
                 </div>
 
                 <div className="p-6">
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {statusOrder.map(
                       (status, index) => (
                         <div
@@ -195,7 +195,7 @@ export default function StatusClient({
                   perizinan, silakan hubungi admin .
                 </p>
 
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <a
                     href={`https://wa.me/6281278220598?text=${encodeURIComponent(
                       `Halo Admin,
@@ -241,42 +241,30 @@ export default function StatusClient({
                   
 
                   {canUpload && (
-                    <form
+                   <form
                       onSubmit={(e) => {
                         e.preventDefault();
-
-                        const formData =
-                          new FormData(
-                            e.currentTarget
-                          );
-
-                        startTransition(
-                          async () => {
-                            const res =
-                              await uploadDokumen(
-                                formData
-                              );
-
-                            if (
-                              res?.success
-                            ) {
-                              toast.success(
-                                "Dokumen berhasil diupload"
-                              );
-
-                              e.currentTarget.reset();
-
-                              window.location.reload();
-                            } else {
-                              toast.error(
-                                res?.error ||
-                                  "Upload gagal"
-                              );
-                            }
+                        const form = e.currentTarget;
+                        const formData = new FormData(form);
+                        startTransition(async () => {
+                          const res = await uploadDokumen(formData);
+                          if (res?.success) {
+                            toast.success("Dokumen berhasil diupload");
+                            form.reset(); // ← ini yang diubah
+                            window.location.reload();
+                          } else {
+                            toast.error(res?.error || "Upload gagal");
                           }
-                        );
+                        });
                       }}
-                      className="mt-6 flex gap-2 items-center"
+                    className="
+mt-6
+flex
+flex-col
+sm:flex-row
+gap-3
+sm:items-center
+"
                     >
                       <input
                         type="hidden"
@@ -335,7 +323,7 @@ export default function StatusClient({
                                 key={
                                   komentar.id
                                 }
-                                className="bg-slate-50 border rounded-lg p-3"
+                                className="bg-slate-50 border rounded-lg p-3 sm:p-4"
                               >
                                 <p className="font-medium text-sm">
                                   {

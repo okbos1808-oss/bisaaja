@@ -70,8 +70,18 @@ export default function FormPendaftaran() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="
+min-h-screen
+bg-gradient-to-br
+from-slate-50
+via-blue-50
+to-indigo-100
+py-6
+sm:py-10
+px-3
+sm:px-4
+">
+      <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-1">
@@ -82,17 +92,42 @@ export default function FormPendaftaran() {
             </span>
           </div>
 
-          <h1 className="text-3xl font-bold text-slate-800">
-            Pendaftaran Permohonan
+<h1 className="
+text-2xl
+sm:text-3xl
+lg:text-4xl
+font-bold
+bg-gradient-to-r
+from-blue-600
+to-indigo-600
+bg-clip-text
+text-transparent
+">            Pendaftaran Permohonan
           </h1>
-
-          <p className="text-slate-500 mt-1">
+<p className="
+text-sm
+sm:text-base
+text-slate-500
+mt-2
+max-w-lg
+">
             Isi formulir berikut untuk mengajukan layanan usaha Anda.
           </p>
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+        <div
+className="
+bg-white/90
+backdrop-blur-xl
+rounded-3xl
+shadow-xl
+border
+border-white/30
+p-5
+sm:p-8
+"
+>
           {result?.success && (
             <div className="flex items-start gap-3 bg-green-50 border border-green-200 text-green-800 rounded-xl p-4 mb-6">
               <CheckCircle2 className="w-5 h-5 mt-0.5 shrink-0" />
@@ -137,7 +172,21 @@ export default function FormPendaftaran() {
                 name="namaUsaha"
                 required
                 placeholder="Contoh: Toko Maju Jaya"
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              className="
+w-full
+rounded-2xl
+border
+border-slate-200
+bg-white
+px-4
+py-3
+text-base
+focus:outline-none
+focus:ring-2
+focus:ring-blue-500
+focus:border-transparent
+transition
+"
               />
             </div>
 
@@ -159,8 +208,19 @@ export default function FormPendaftaran() {
                   setDivisi(e.target.value);
                   setLayanan("");
                 }}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
-              >
+className="
+w-full
+rounded-2xl
+border
+border-slate-200
+bg-white
+px-4
+py-3
+text-base
+appearance-none
+focus:ring-2
+focus:ring-blue-500
+"              >
                 <option value="">-- Pilih Divisi --</option>
 
                 <option value="legalitas">
@@ -272,8 +332,23 @@ export default function FormPendaftaran() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2"
-            >
+className="
+w-full
+py-4
+rounded-2xl
+font-semibold
+text-white
+bg-gradient-to-r
+from-blue-600
+to-indigo-600
+hover:from-blue-700
+hover:to-indigo-700
+shadow-lg
+hover:shadow-xl
+transition-all
+duration-300
+disabled:opacity-70
+"            >
               {isPending ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />

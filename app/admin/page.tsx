@@ -36,10 +36,7 @@ console.log("SESSION:", JSON.stringify(session, null, 2));
 
   return (
     <div className="bg-slate-50 min-h-screen">
-      <div className="max-w-screen-xl mx-auto py-10 px-4">
-        <h1 className="text-2xl font-bold mb-6">
-          Dashboard Admin
-        </h1>
+      <div className="max-w-screen-7xl mx-auto py-10 px-4">
 
         <AdminDashboard data={data} />
         
