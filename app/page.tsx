@@ -34,7 +34,7 @@ export default function Home() {
 
   return (
     <div className="max-w-screen-7xl mx-auto py-6 p-4">
-      <h1 className="text-2xl">HomePage</h1>
+    
 
       <div className="text-center text-2xl font-bold text-gray-800 mt-2 mb-2">
         WELCOME JRA CONSULTING
