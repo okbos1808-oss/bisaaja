@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { auth, signOut } from "../lib/auth";
+import AdminNotification from "./AdminNotification";
 import MobileMenu from "./MobileMenu";
 
 const Navbar = async () => {
@@ -8,8 +9,8 @@ const Navbar = async () => {
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-7-xl mx-auto flex items-center justify-between p-4">
-        
+      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
+
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-3">
           <div className="relative w-10 h-10 md:w-12 md:h-12">
@@ -21,7 +22,6 @@ const Navbar = async () => {
               className="rounded-full object-cover"
             />
           </div>
-
           <span className="font-semibold text-sm md:text-lg">
             PT. JAYA RIZKI ALEXANDRA
           </span>
@@ -34,6 +34,12 @@ const Navbar = async () => {
               <Link href="/">Home</Link>
             </li>
 
+            {/* ✅ Katalog selalu tampil, untuk semua kondisi */}
+            <li>
+              <Link href="/katalog">Katalog</Link>
+            </li>
+
+            {/* Menu khusus role user */}
             {session?.user?.role === "user" && (
               <>
                 <li>
@@ -45,6 +51,7 @@ const Navbar = async () => {
               </>
             )}
 
+            {/* Menu khusus role admin */}
             {session?.user?.role === "admin" && (
               <>
                 <li>
@@ -57,49 +64,48 @@ const Navbar = async () => {
             )}
           </ul>
 
-          {session && (
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <p className="font-semibold text-sm">
-                  {session.user?.name}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {session.user?.role}
-                </p>
+          <div className="flex items-center gap-3">
+            {session?.user?.role === "admin" && <AdminNotification />}
+
+            {session && (
+              <div className="flex items-center gap-3">
+                <div className="text-right">
+                  <p className="font-semibold text-sm">{session.user?.name}</p>
+                  <p className="text-xs text-gray-500">{session.user?.role}</p>
+                </div>
+                <Image
+                  src={session.user?.image || "/next.svg"}
+                  alt="Avatar"
+                  width={35}
+                  height={35}
+                  className="rounded-full"
+                />
               </div>
+            )}
 
-              <Image
-                src={session.user?.image || "/next.svg"}
-                alt="Avatar"
-                width={35}
-                height={35}
-                className="rounded-full"
-              />
-            </div>
-          )}
-
-          {session ? (
-            <form
-              action={async () => {
-                "use server";
-                await signOut();
-              }}
-            >
-              <button
-                type="submit"
-                className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
+            {session ? (
+              <form
+                action={async () => {
+                  "use server";
+                  await signOut();
+                }}
               >
-                Logout
-              </button>
-            </form>
-          ) : (
-            <Link
-              href="/login"
-              className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-            >
-              Login
-            </Link>
-          )}
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
+                >
+                  Logout
+                </button>
+              </form>
+            ) : (
+              <Link
+                href="/login"
+                className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+              >
+                Login
+              </Link>
+            )}
+          </div>
         </div>
 
         {/* MOBILE MENU */}

@@ -3,6 +3,7 @@ import ServiceCard from "@/components/ServiceCard";
 import TeamSection from "@/components/TeamSection";
 import DataImage from "@/lib/data1"
 import WhyUs from "@/components/WhyUs";
+import KatalogSection from "@/components/KatalogSection";
 
 export default function Home() {
   const teamData = [
@@ -41,12 +42,13 @@ export default function Home() {
       </div>
 
       <HeroText />
-     <ServiceCard title="Judul Service" desc="Deskripsi service" />
+     <ServiceCard title="PT. JAYA RIZKY ALEXANDRA" desc="PELAYANAN PERIZINAN" />
    
       <WhyUs/>
 
       {/* ✅ kirim data ke component */}
       <TeamSection data={teamData} />
+       <KatalogSection />
     </div>
   );
 }

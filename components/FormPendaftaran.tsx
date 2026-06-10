@@ -72,7 +72,7 @@ export default function FormPendaftaran() {
   return (
     <div className="
 min-h-screen
-bg-gradient-to-br
+bg-linear-to-br
 from-slate-50
 via-blue-50
 to-indigo-100
@@ -97,7 +97,7 @@ text-2xl
 sm:text-3xl
 lg:text-4xl
 font-bold
-bg-gradient-to-r
+bg-linear-to-r
 from-blue-600
 to-indigo-600
 bg-clip-text
@@ -338,7 +338,7 @@ py-4
 rounded-2xl
 font-semibold
 text-white
-bg-gradient-to-r
+bg-linear-to-r
 from-blue-600
 to-indigo-600
 hover:from-blue-700

@@ -32,3 +32,8 @@ api/auth/callback/google
 
 ### untuk mengecek updat di  vercel
 git log --oneline -n 5
+
+git add .
+git commit -m "fix upload form reset error"
+git push origin main 
+untum update 
